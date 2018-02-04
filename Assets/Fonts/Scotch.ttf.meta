@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 582dbe0d51ca7334b91c4a4095ded628
+timeCreated: 1516201323
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Scotch(FONT BY LYAJKA)
+  fontNames:
+  - Scotch(FONT BY LYAJKA)
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
