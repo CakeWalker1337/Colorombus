@@ -35,6 +35,7 @@ public class UIManagerScript : MonoBehaviour {
 	private static int currentMenu;
 	private static int currentPage;
 	private bool isReturnerRun = false;
+	private bool exitRequested = false;
 
 	void Start()
 	{
@@ -58,6 +59,8 @@ public class UIManagerScript : MonoBehaviour {
 			img = GameObject.Find("EffectsButtonImage").GetComponent<Image>();
 			img.sprite = (GameController.Effects == 1)? Dump.effectsOnSprite : Dump.effectsOffSprite;
 
+			img = (Image) GameObject.Find("BlockDesignButtonImage").GetComponent<Image>();
+			img.sprite = (GameController.Design == GameController.DESIGN_NEW)? Dump.newRectSprite : Dump.oldRectSprite;
 
 
 			mainMenu.GetComponent<Animator> ().Play ("open");
@@ -86,6 +89,14 @@ public class UIManagerScript : MonoBehaviour {
 			currentPage = -1;
 			ChangePage ();
 
+
+			if (GameController.IsFirstGame == 0) {
+				HowToPlayButton_Callback ();
+				GameController.IsFirstGame = 1;
+				GameController.SaveFirstGame ();
+			}
+			else howToPlayMenu.SetActive (false);
+
 			Image img = GameObject.Find("MusicButtonImage").GetComponent<Image>();
 			img.sprite = (GameController.Music == 1)? Dump.musicOnSprite : Dump.musicOffSprite;
 
@@ -94,11 +105,11 @@ public class UIManagerScript : MonoBehaviour {
 
 			img = GameObject.Find("EffectsButtonImage").GetComponent<Image>();
 			img.sprite = (GameController.Effects == 1)? Dump.effectsOnSprite : Dump.effectsOffSprite;
-
 			adError = GameObject.Find ("AdError");
+			
 
 			currentMenu = -1;
-			howToPlayMenu.SetActive (false);
+			
 			shopMenu.SetActive (false);
 			infoMenu.SetActive (false);
 			pauseMenu.SetActive (false);
@@ -125,7 +136,6 @@ public class UIManagerScript : MonoBehaviour {
 	*/
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
-			Debug.Log (currentMenu.ToString());
 			if (currentMenu == -1) {
 				PauseMenuButton_Callback ();
 			}
@@ -135,36 +145,57 @@ public class UIManagerScript : MonoBehaviour {
 			} else if (currentMenu == 1) {
 				optionsMenu.SetActive (false);
 				mainMenu.SetActive (true);
-				ReturnToMain ();
+				currentMenu = 0;
+				WaitDelay ();
 			} else if (currentMenu == 2) {
 				ClosePauseMenu ();
 			} else if (currentMenu == 3) {
 				CloseGameOverMenu ();
 			} else if (currentMenu == 4) {
-				ClosePauseMenu ();
+				CloseSecondChanceMenu ();
 				currentMenu = -1;
 			} else if (currentMenu == 5) {
 				creditsMenu.SetActive (false);
 				mainMenu.SetActive (true);
-				ReturnToMain ();
+				currentMenu = 0;
+				WaitDelay ();
+
 			}
 			else if (currentMenu == 6) {
 				shopMenu.SetActive (false);
-				mainMenu.SetActive (true);
-				ReturnToMain ();
+				if (mainMenu == null)
+					currentMenu = 3;
+				else
+					currentMenu = 0;
+				WaitDelay ();
 			}
 			else if (currentMenu == 7) {
 				infoMenu.SetActive (false);
-				mainMenu.SetActive (true);
-				ReturnToMain ();
+				currentMenu = 6;
+				WaitDelay ();
 			}
 			else if (currentMenu == 8) {
 				howToPlayMenu.SetActive (false);
 			}
+
+			if (exitRequested)
+				Application.Quit ();
+			else
+				StartCoroutine (AppExit_Timer());
 		} 
 		else if (Input.GetKeyDown (KeyCode.Home) || Input.GetKeyDown(KeyCode.Menu)) 
 		{
 			GameController.SaveUserData ();
+		}
+	}
+
+	IEnumerator AppExit_Timer()
+	{
+		if (!exitRequested) {
+			yield return new WaitForSeconds (0.1f);
+			exitRequested = true;
+			yield return new WaitForSeconds (0.4f);
+			exitRequested = false;
 		}
 	}
 
@@ -272,7 +303,16 @@ public class UIManagerScript : MonoBehaviour {
 	{
 		GameController.IsSecondChanceUsed = 1;
 		secondChanceMenu.SetActive (true);
-		adError.SetActive (false);
+
+
+		if (!GameController.IsAdLoaded ()) {
+			DisableButton (GameObject.Find ("SecondChanceButton_ShowAd"));
+			adError.SetActive (true);
+		} else {
+			EnableButton (GameObject.Find ("SecondChanceButton_ShowAd"));
+			adError.SetActive (false);
+		}
+
 		secondChanceMenu.GetComponent<Animator> ().Play ("open");
 		currentMenu = 4;
 		StartCountdown ();
@@ -281,11 +321,9 @@ public class UIManagerScript : MonoBehaviour {
 	public void SecondChanceShowAdButton_Callback()
 	{
 		GameController.TryPlaySound (SoundPool.Button);
-		if (GameController.IsAdLoaded ()) {
-			GameController.ShowSecondChanceVideoAd ();
+		if (GameController.ShowSecondChanceVideoAd ()) {
 			CloseSecondChanceMenu ();
 		} else {
-			Debug.Log ("");
 			ShowFailAd ();
 		}
 	}
@@ -422,8 +460,7 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Bomb, GameController.GetSkillLevel (Skills.Bomb));
 		GameController.UpSkillLevel (Skills.Bomb);
-		UpdateSkillInfo (Skills.Bomb);
-		UpdateShopBalance ();
+		UpdateShopMenu ();
 		GameController.SaveUserData ();
 	}
 
@@ -432,8 +469,7 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Electric, GameController.GetSkillLevel (Skills.Electric));
 		GameController.UpSkillLevel (Skills.Electric);
-		UpdateSkillInfo (Skills.Electric);
-		UpdateShopBalance ();
+		UpdateShopMenu ();
 		GameController.SaveUserData ();
 	}
 
@@ -442,8 +478,7 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Skull, GameController.GetSkillLevel (Skills.Skull));
 		GameController.UpSkillLevel (Skills.Skull);
-		UpdateSkillInfo (Skills.Skull);
-		UpdateShopBalance ();
+		UpdateShopMenu ();
 		GameController.SaveUserData ();
 	}
 
@@ -452,8 +487,7 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Double, GameController.GetSkillLevel (Skills.Double));
 		GameController.UpSkillLevel (Skills.Double);
-		UpdateSkillInfo (Skills.Double);
-		UpdateShopBalance ();
+		UpdateShopMenu ();
 		GameController.SaveUserData ();
 	}
 
@@ -612,6 +646,15 @@ public class UIManagerScript : MonoBehaviour {
 		img.sprite = (GameController.Effects == 1)? Dump.effectsOnSprite : Dump.effectsOffSprite;
 	}
 
+	public void DesignButton_Callback()
+	{
+		GameController.TryPlaySound (SoundPool.Button);
+		GameController.SwitchDesignSettings ();
+
+		Image img = (Image) GameObject.Find("BlockDesignButtonImage").GetComponent<Image>();
+		img.sprite = (GameController.Design == GameController.DESIGN_NEW)? Dump.newRectSprite : Dump.oldRectSprite;
+	}
+
 	public void BackButton_Callback()
 	{
 		GameController.TryPlaySound (SoundPool.Button);
@@ -626,7 +669,7 @@ public class UIManagerScript : MonoBehaviour {
 	{
 		GameController.TryPlaySound (SoundPool.Button);
 		//Open Rate URL
-		//Application.OpenURL("URL");
+		Application.OpenURL("https://play.google.com/store/apps/details?id=com.tenxgames.colorumbus");
 	}
 
 	public void HomeButton_Callback()
@@ -644,11 +687,6 @@ public class UIManagerScript : MonoBehaviour {
 	{
 		GameController.TryPlaySound (SoundPool.Button);
 		//Shop
-		if (mainMenu != null)
-			mainMenu.SetActive (false);
-		else
-			gameOverMenu.SetActive (false);
-
 		currentMenu = 6;
 		shopMenu.SetActive(true);
 
@@ -749,7 +787,7 @@ public class UIManagerScript : MonoBehaviour {
 		}
 	}
 
-	public void ReturnToMain()
+	public void WaitDelay()
 	{	
 		if (isReturnerRun == false)
 			isReturnerRun = true;
@@ -758,7 +796,6 @@ public class UIManagerScript : MonoBehaviour {
 
 	IEnumerator Waiter(){
 		yield return new WaitForSeconds (0.1f);
-		currentMenu = 0;
 		isReturnerRun = false;
 	}
 }

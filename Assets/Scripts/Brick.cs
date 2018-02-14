@@ -78,7 +78,8 @@ public class Brick {
 		brick = new GameObject();
 		brick.layer = 5;
 		Image im = brick.AddComponent<Image> ();
-		im.sprite = Dump.rectSprite;
+
+		im.sprite = (GameController.Design == GameController.DESIGN_NEW)? Dump.newRectSprite:Dump.oldRectSprite;
 		im.color = PickBrickColor (bc);
 		var anim = brick.AddComponent<Animator> ();
 		anim.runtimeAnimatorController = Dump.spawnController;

@@ -17,14 +17,14 @@ public class AdManager : IRewardedVideoAdListener {
 		Appodeal.setRewardedVideoCallbacks (this);
 	}
 
-	public void TryStartSecondChanceVideo()
+	public bool TryStartSecondChanceVideo()
 	{
-		Appodeal.show (Appodeal.REWARDED_VIDEO, "default");
+		return Appodeal.show (Appodeal.REWARDED_VIDEO, "default");
 	}
 
-	public void TryStartShopCoinsVideo()
+	public bool TryStartShopCoinsVideo()
 	{
-		Appodeal.show (Appodeal.REWARDED_VIDEO, "ShopCoins");
+		return Appodeal.show (Appodeal.REWARDED_VIDEO, "ShopCoins");
 	}
 
 	#region Rewarded Video callback handlers

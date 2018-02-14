@@ -28,6 +28,8 @@ public enum SoundPool
 
 public static class GameController {
  
+	public static int IsFirstGame = 0;
+
 	private static List<int> skills;
 	public static int GetSkillLevel(Skills index){
 		return skills [(int)index];
@@ -42,7 +44,6 @@ public static class GameController {
 	}
 
 	private static int[][] costs;
-	private static int intersistialCalls;
 
 	public static int SkillsCount{get{ return skills.Count;}}
 
@@ -51,6 +52,7 @@ public static class GameController {
 	public static int Sound { get; set; }
 	public static int Music { get; set; }
 	public static int Effects { get; set;}
+	public static int Design { get; set;}
 
 	public static int BestScore { get; set; }
 	public static int Coins { get; set; }
@@ -58,6 +60,8 @@ public static class GameController {
 	public static int Turn { get; set; }
 	public static int IsGameStarted { get; set; }
 	public static int IsSecondChanceUsed { get; set; }
+
+	public static int IntersistialCount { get; set; } 
 
 	public static AudioSource MusicSource { get; set; }
 	public static AudioSource SoundSource { get; set; }
@@ -67,9 +71,11 @@ public static class GameController {
 	private static AdManager adManager;
 
 	public static int COINS_FOR_AD = 50;
+	public static int DESIGN_OLD = 0;
+	public static int DESIGN_NEW = 1;
 
 	public static void InitGlobalSettings()
-	{
+	{		
 		LoadUserData ();
 		Dump.Init ();
 		InitSkillCosts ();
@@ -87,8 +93,7 @@ public static class GameController {
 		GameObject.DontDestroyOnLoad (audioPoint);
 		SoundSource = audioPoint.GetComponent<AudioSource>(); 
 		IsSecondChanceUsed = 0;
-		intersistialCalls = 0;
-		adManager = new AdManager ();
+		adManager = new AdManager (); 
 		adManager.InitAds ();
 		isInitialized = true;
 	}
@@ -179,6 +184,12 @@ public static class GameController {
 			MusicSource.Stop ();
 	}
 
+	public static void SwitchDesignSettings()
+	{
+		Design = (Design == DESIGN_NEW) ? DESIGN_OLD : DESIGN_NEW;
+		Dump.LoadColors ();
+	}
+
 	public static void SwitchEffectsSettings()
 	{
 		Effects = (Effects == 1) ? 0 : 1;
@@ -189,11 +200,13 @@ public static class GameController {
 		Sound = (PlayerPrefs.HasKey ("sound")) ? PlayerPrefs.GetInt ("sound") : 1;
 		Music = (PlayerPrefs.HasKey ("music")) ? PlayerPrefs.GetInt ("music") : 1;
 		Effects = (PlayerPrefs.HasKey ("effects")) ? PlayerPrefs.GetInt ("effects") : 1;
-		Coins = (PlayerPrefs.HasKey ("coins")) ? PlayerPrefs.GetInt ("coins") : 0;
+		Design = (PlayerPrefs.HasKey ("design")) ? PlayerPrefs.GetInt ("design") : DESIGN_OLD;
+		Coins = (PlayerPrefs.HasKey ("coins")) ? PlayerPrefs.GetInt ("coins") : 100000;
 		skills = ParseSkills((PlayerPrefs.HasKey ("skills")) ? PlayerPrefs.GetString ("skills") : "0_0_0_0");
 		BestScore = (PlayerPrefs.HasKey ("best")) ? PlayerPrefs.GetInt ("best") : 0;
 		IsGameStarted = (PlayerPrefs.HasKey ("game_started")) ? PlayerPrefs.GetInt ("game_started") : 0;
-
+		IsFirstGame = (PlayerPrefs.HasKey ("first_game")) ? PlayerPrefs.GetInt ("first_game") : 0;
+		IntersistialCount = (PlayerPrefs.HasKey ("intersistial")) ? PlayerPrefs.GetInt ("intersistial") : 0;
 	}
 
 	public static void SaveUserData()
@@ -201,15 +214,24 @@ public static class GameController {
 		PlayerPrefs.SetInt ("sound", Sound);
 		PlayerPrefs.SetInt ("music", Music);
 		PlayerPrefs.SetInt ("effects", Effects);
+		PlayerPrefs.SetInt ("design", Design);
 		PlayerPrefs.SetInt ("best", BestScore);
 		PlayerPrefs.SetInt ("coins", Coins);
 		PlayerPrefs.SetString ("skills", BuildSkillsString(skills));
 		PlayerPrefs.SetInt ("game_started", IsGameStarted);
+		PlayerPrefs.SetInt ("intersistial", IntersistialCount);
 		PlayerPrefs.Save ();
 	}
 
 	public static void SaveCoins(){
 		PlayerPrefs.SetInt ("coins", Coins);
+		PlayerPrefs.Save ();
+	}
+
+	public static void SaveFirstGame()
+	{
+		PlayerPrefs.SetInt ("first_game", IsFirstGame);
+		PlayerPrefs.Save ();
 	}
 
 	public static List<int> ParseSkills(string str){
@@ -328,23 +350,19 @@ public static class GameController {
 	public static bool ShowSecondChanceVideoAd()
 	{
 		if (IsAdLoaded()) {
-			adManager.TryStartSecondChanceVideo ();
-			return true;
+			return adManager.TryStartSecondChanceVideo ();
 		}
-
 		return false;
-
 		//Non-add mode
 		//ContinueGame();
+		//return true;
 	}
 
 	public static bool ShowBuyCoinsVideoAd()
 	{
 		if (IsAdLoaded()){
-			adManager.TryStartShopCoinsVideo ();
-			return true;
+			return adManager.TryStartShopCoinsVideo ();
 		}
-
 		return false;
 	}
 
@@ -355,10 +373,10 @@ public static class GameController {
 
 	public static void ShowInterstitialAd()
 	{
-		intersistialCalls++;
-		if (intersistialCalls == 3) {
+		IntersistialCount++;
+		if (IntersistialCount == 5) {
+			IntersistialCount = 0;
 			adManager.TryStartInterstitial ();
-			intersistialCalls = 0;
 		}
 	}
 

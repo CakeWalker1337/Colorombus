@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1013,7 +1013,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 1
@@ -1323,7 +1323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.03, y: 3.09}
+  m_AnchoredPosition: {x: 2.0200016, y: 3.0400007}
   m_SizeDelta: {x: 76, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378069355
@@ -2210,6 +2210,30 @@ Prefab:
       propertyPath: m_Color.b
       value: 0.9556998
       objectReference: {fileID: 0}
+    - target: {fileID: 114670023680118432, guid: 995c73af04e8c4342ba1038577cbcd11,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4078f4f28bf5ebb4c8a4e5983bd27e63,
+        type: 3}
+    - target: {fileID: 114981540085848464, guid: 995c73af04e8c4342ba1038577cbcd11,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4078f4f28bf5ebb4c8a4e5983bd27e63,
+        type: 3}
+    - target: {fileID: 114253016044080364, guid: 995c73af04e8c4342ba1038577cbcd11,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4078f4f28bf5ebb4c8a4e5983bd27e63,
+        type: 3}
+    - target: {fileID: 114108309279569940, guid: 995c73af04e8c4342ba1038577cbcd11,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4078f4f28bf5ebb4c8a4e5983bd27e63,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 995c73af04e8c4342ba1038577cbcd11, type: 2}
   m_IsPrefabParent: 0
@@ -2518,8 +2542,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 33.5, y: -0.00004196167}
-  m_SizeDelta: {x: -85.6, y: 58.1}
+  m_AnchoredPosition: {x: 52.8, y: -5.150049}
+  m_SizeDelta: {x: -88.9, y: 47.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &828303777
 MonoBehaviour:
@@ -2533,7 +2557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2541,7 +2565,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 1
@@ -3161,7 +3185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3169,7 +3193,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
@@ -3181,7 +3205,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 100000
+  m_Text: 1000
 --- !u!222 &902876010
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3572,7 +3596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3580,7 +3604,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 1
@@ -4289,8 +4313,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: -16.2}
-  m_SizeDelta: {x: 180.3, y: 51.24}
+  m_AnchoredPosition: {x: -9.300049, y: -16}
+  m_SizeDelta: {x: 191.9, y: 51.2}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1243804701
 MonoBehaviour:
@@ -5055,7 +5079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 71.250015}
+  m_AnchoredPosition: {x: -27.340332, y: 71.250015}
   m_SizeDelta: {x: 185.7, y: 50.26}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1455189968
@@ -5612,7 +5636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.01, y: -0.71}
+  m_AnchoredPosition: {x: 2.0000017, y: -0.7599992}
   m_SizeDelta: {x: 76, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669739453
@@ -6014,7 +6038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.01, y: 1.21}
+  m_AnchoredPosition: {x: 2, y: 1.16}
   m_SizeDelta: {x: 76, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746401015
@@ -6650,7 +6674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 38.175, y: -0.000024795532}
+  m_AnchoredPosition: {x: 38.125, y: -0.00005340576}
   m_SizeDelta: {x: 76.25, y: 58.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1820317064
@@ -6665,7 +6689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6673,7 +6697,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 1
@@ -6813,7 +6837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6821,7 +6845,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 1
@@ -8173,7 +8197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 40.4, y: 0.000022888184}
+  m_AnchoredPosition: {x: 31.988373, y: 0.000022888184}
   m_SizeDelta: {x: 80.8, y: 58.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2046763910
@@ -8188,7 +8212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -8196,7 +8220,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 1
@@ -8247,8 +8271,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 37.1, y: -0.000045776367}
-  m_SizeDelta: {x: -91.5, y: 58.1}
+  m_AnchoredPosition: {x: 41, y: -5.88}
+  m_SizeDelta: {x: -82, y: 58.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058190233
 MonoBehaviour:
@@ -8262,7 +8286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
+  m_Color: {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -8270,7 +8294,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 582dbe0d51ca7334b91c4a4095ded628, type: 3}
+    m_Font: {fileID: 12800000, guid: 6fde23335ed0fef4d9f5a5409c6e9cca, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 1

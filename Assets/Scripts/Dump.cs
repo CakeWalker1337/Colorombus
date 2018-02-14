@@ -23,7 +23,8 @@ public class Dump : MonoBehaviour {
 
 	public static Sprite slotSpriteRectangle{ get; set;}
 	public static Sprite triSprite{ get; set;}
-	public static Sprite rectSprite{ get; set;}
+	public static Sprite newRectSprite{ get; set;}
+	public static Sprite oldRectSprite{ get; set;}
 
 	public static Sprite bombSprite{ get; set;}
 	public static Sprite electricSprite{ get; set;}
@@ -71,7 +72,8 @@ public class Dump : MonoBehaviour {
 
 		triSprite = Resources.Load<Sprite> ("Textures/Shapes/triangle");
 		slotSpriteRectangle = Resources.Load<Sprite> ("Textures/Shapes/four");
-		rectSprite = Resources.Load<Sprite> ("Textures/Shapes/rectangle");
+		newRectSprite = Resources.Load<Sprite> ("Textures/Shapes/flat_rectangle_radiance_small_border");
+		oldRectSprite = Resources.Load<Sprite> ("Textures/Shapes/rectangle");
 
 		bombSprite = Resources.Load<Sprite> ("Textures/Icons/bomb");
 		electricSprite = Resources.Load<Sprite> ("Textures/Icons/flash");
@@ -92,13 +94,30 @@ public class Dump : MonoBehaviour {
 		spawnController = Resources.Load<RuntimeAnimatorController> ("Animations/spawnController") as RuntimeAnimatorController;
 		scoreController = Resources.Load<RuntimeAnimatorController> ("Animations/scoreController") as RuntimeAnimatorController;
 
-		RedColor = new Color (1f, 0.267f, 0.267f);
-		OrangeColor = new Color (1f, 0.722f, 0.22f);
-		YellowColor = new Color (0.965f, 1f, 0.235f);
-		GreenColor = new Color (0.211f, 1f, 0.38f);
-		BlueColor = new Color (0.27f, 1f, 0.941f);
-		DarkBlueColor = new Color (0.11f, 0.373f, 1f);
-		PurpleColor = new Color (0.988f, 0.278f, 1f);
+		LoadColors ();
+	}
+
+	public static void LoadColors()
+	{
+		if (GameController.Design == GameController.DESIGN_NEW) {
+			RedColor = new Color (1f, 0.388f, 0.278f);
+			OrangeColor = new Color (0.91f, 0.64f, 0.23f);
+			YellowColor = new Color (0.88f, 0.88f, 0.02f);
+			GreenColor = new Color (0.19f, 0.84f, 0.48f);
+			BlueColor = new Color (0.02f, 0.69f, 0.82f);
+			DarkBlueColor = new Color (0.06f, 0.25f, 0.82f);
+			PurpleColor = new Color (0.85f, 0f, 0.79f);
+		}
+		else
+		{
+			RedColor = new Color (1f, 0.267f, 0.267f);
+			OrangeColor = new Color (1f, 0.722f, 0.22f);
+			YellowColor = new Color (0.965f, 1f, 0.235f);
+			GreenColor = new Color (0.211f, 1f, 0.38f);
+			BlueColor = new Color (0.27f, 1f, 0.941f);
+			DarkBlueColor = new Color (0.11f, 0.373f, 1f);
+			PurpleColor = new Color (0.988f, 0.278f, 1f);
+		}
 	}
 
 }
