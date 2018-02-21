@@ -3,11 +3,13 @@
 
 Prepare your mind for relax! Get ready to break your stereotype about light games. No one game gives you more comfort time spending, than Colorumbus. This game is a perfect solution for relax and time killing, with fantastic atmosphere, which make your feel more pleasant.
 
+***Download on Google Play:*** [Click!](https://play.google.com/store/apps/details?id=com.tenxgames.colorumbus)
+
 ---
 
 Готов дать передышку своему разуму? Разрушь стереотип про игры-однодневки! Ни одна игра не сделает твое времяпрепровождение приятнее, чем Colorumbus. Эта игра – превосходное решение для расслабления и убийства времени, сочетающее в себе приятную атмосферу, уникальную, и вместе с этим простую идею, незамысловатый геймплей, а также восхитительную графику. Это та игра, которая позволит отвлечься от повседневной суеты и окунуться в приятную атмосферу. Попробуй сам!
 
- 
+ ***Ссылка на скачивание в Google Play:*** [Click!](https://play.google.com/store/apps/details?id=com.tenxgames.colorumbus)
 
 ## Game process / Игровой процесс
 
