@@ -6,7 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
  
-
+/// <summary>
+/// Color reward.
+/// </summary>
 public enum ColorReward
 {
 	Red = 10,
@@ -18,6 +20,9 @@ public enum ColorReward
 	Purple = 70
 };
 
+/// <summary>
+/// Destroying animation.
+/// </summary>
 public enum DestroyingAnimation
 {
 	None = 0,
@@ -26,6 +31,9 @@ public enum DestroyingAnimation
 	Inferno = 3
 };
 
+/// <summary>
+/// Level editor.
+/// </summary>
 public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	private static List<GameObject> slots;
 	public const int MAXNUM = 7;
@@ -63,6 +71,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 
 		TrashCan = new List<GameObject>();
 
+		//Counting the width of elements
 		CellWidth = MainLayer.rect.height * 0.08f;
 		CellHeight = CellWidth;
 		MainGrid.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, CellWidth * 6.3f);
@@ -72,6 +81,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		ItemGrid.gameObject.GetComponent<GridLayoutGroup> ().cellSize = new Vector2 (CellWidth, CellHeight);
 		ItemGrid.gameObject.GetComponent<GridLayoutGroup> ().spacing = new Vector2 (CellWidth, 10f);
 
+		//Generating itemslots (in the bottom of screen)
 		for (int i = 0; i < 3; i++) {
 			GameObject go = new GameObject();
 			go.name = "itemslot"+(i+1).ToString();
@@ -84,6 +94,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 
 		//PlayerPrefs.DeleteKey ("gamedata");
 
+		// Generating slots (main grid)
 		MainGrid.gameObject.GetComponent<GridLayoutGroup> ().cellSize = new Vector2 (CellWidth, CellHeight);
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 6; j++) {
@@ -110,16 +121,20 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		StartGame ();
 	}
 
+	/// <summary>
+	/// Fills the item grid.
+	/// </summary>
 	public void FillItemGrid()
 	{
 		List<int> elements = new List<int>();
+		//"smart" counting of colors
 		for(int j = 1; j<=7; j++)
 		{
 			if (CurrentColors [j] > 0)
 				elements.Add (j);
 		}
 		int r = Random.Range (1, 4);
-
+		//generating blocks
 		for (int i = 0; i < 3; i++) {
 			BrickColor bc = BrickColor.Random;
 
@@ -144,7 +159,9 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		}
 	}
 
-
+	/// <summary>
+	/// Continues the game after first lose (if ad has watched).
+	/// </summary>
 	public void ContinueGame()
 	{
 		ClearField ();
@@ -159,6 +176,9 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		GameController.SaveUserData ();
 	}
 
+	/// <summary>
+	/// Starts the game.
+	/// </summary>
 	public void StartGame()
 	{
 		BestScoreBoard.GetComponent<Text> ().text = GameController.BestScore.ToString ();
@@ -185,6 +205,9 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		}
 		RecountCurrentMult ();
 	}
+	/// <summary>
+	/// Clears the field.
+	/// </summary>
 	void ClearField()
 	{
 		foreach (GameObject sl in slots) {
@@ -205,9 +228,14 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	}
 		
 	#region IHasTurnEnded implementation
+	/// <summary>
+	/// Determines whether this instance has turn ended the specified currentItem.
+	/// </summary>
+	/// <returns><c>true</c> if this instance has turn ended the specified currentItem; otherwise, <c>false</c>.</returns>
+	/// <param name="currentItem">Current item.</param>
 	public void HasTurnEnded (GameObject currentItem)
 	{
-		
+		//Destroying unused elements of item grid
 		for (int i = 0; i < ItemGrid.childCount; i++) {
 			if (ItemGrid.GetChild (i).childCount > 0) {
 				if (ItemGrid.GetChild (i).GetChild (0).childCount > 0) {
@@ -218,12 +246,14 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 				DestroyWithAnimation (ItemGrid.GetChild(i).GetChild(0).gameObject, DestroyingAnimation.Decreasing, false, false);
 			}
 		}
-			
+
+		//Clears the trashcan (massive of objects, which has worked off)
 		for (int i = 0; i < TrashCan.Count; i++) {
 			Destroy (TrashCan[i]);
 		}
 		TrashCan.Clear ();
 
+		// Counting targets (elements which has got a close positions related current dragged element) 
 		List<GameObject> targets = new List<GameObject> ();
 		GameObject currentSlot = currentItem.transform.parent.gameObject;
 		currentTurnStreak = 0;
@@ -234,6 +264,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 			}
 		}
 		if (targets.Count > 1) {
+			//Destroying target elements
 			GameController.TryPlaySound (SoundPool.Destroy);
 			for (int i = 0; i < targets.Count; i++) {
 				if (targets [i].transform.childCount > 0) {
@@ -246,7 +277,11 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		StartCoroutine (NewGeneration (0.5f));
 	}
 	#endregion
-
+	/// <summary>
+	/// Generates the new generation.
+	/// </summary>
+	/// <returns>Enumerator.</returns>
+	/// <param name="sec">Secs for delay.</param>
 	IEnumerator NewGeneration(float sec){
 		yield return new WaitForSeconds(sec);
 		List<Transform> freeSlots = new List<Transform> ();
@@ -280,6 +315,10 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		SaveGame ();
 	}
 
+	/// <summary>
+	/// Generates the type of the brick.
+	/// </summary>
+	/// <returns>The brick type.</returns>
 	BrickType GenerateBrickType(){
 
 		int sum = 0, rand = Random.Range(1, 10000);
@@ -316,6 +355,9 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		return BrickType.Standart;
 	}
 
+	/// <summary>
+	/// Recounts the current mult.
+	/// </summary>
 	void RecountCurrentMult()
 	{
 		float doublemult = (multTurns > 0) ? 2.0f : 1.0f;
@@ -328,6 +370,13 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 			t.color = new Color (0.4f, 0.4f, 0.4f);
 	}
 
+	/// <summary>
+	/// Destroies the with animation.
+	/// </summary>
+	/// <param name="obj">Object for destroying.</param>
+	/// <param name="dat">Destroying animation type (see enum).</param>
+	/// <param name="isRewarded">If set to <c>true</c> is rewarded.</param>
+	/// <param name="isInfluenceOnBonus">If set to <c>true</c> is influence on bonus.</param>
 	void DestroyWithAnimation(GameObject obj, DestroyingAnimation dat, bool isRewarded, bool isInfluenceOnBonus)
 	{
 		if (obj == null)
@@ -526,18 +575,36 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		StartCoroutine (TimerDestroyer (obj));
 	}
 
+	/// <summary>
+	/// Timers the destroyer.
+	/// </summary>
+	/// <returns>The destroyer.</returns>
+	/// <param name="obj">Object.</param>
 	IEnumerator TimerDestroyer(GameObject obj)
 	{
 		yield return new WaitForSeconds (0.2f);
 		Destroy (obj);
 	}
 
+	/// <summary>
+	/// Electrics the desroying delay.
+	/// </summary>
+	/// <returns>The desroying delay.</returns>
+	/// <param name="obj">Object for destroying.</param>
+	/// <param name="da">Destroying animation (see enum).</param>
+	/// <param name="isRewarded">If set to <c>true</c> is rewarded.</param>
+	/// <param name="isInfluenceOnBonus">If set to <c>true</c> is influence on bonus.</param>
 	IEnumerator ElectricDesroyingDelay(GameObject obj, DestroyingAnimation da, bool isRewarded, bool isInfluenceOnBonus)
 	{
 		yield return new WaitForSeconds (0.25f);
 		DestroyWithAnimation (obj, da, isRewarded, isInfluenceOnBonus);
 	}
 
+	/// <summary>
+	/// Gets the color of the points by.
+	/// </summary>
+	/// <returns>The points by color.</returns>
+	/// <param name="color">Color.</param>
 	int GetPointsByColor(Color color)
 	{
 		if (color == Dump.RedColor)
@@ -557,6 +624,11 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		return 0;
 	}
 
+	/// <summary>
+	/// Counts the turn.
+	/// </summary>
+	/// <returns>The turn.</returns>
+	/// <param name="freeCount">Free count.</param>
 	int CountTurn(int freeCount){ //подавляющий алгоритм ;
 		range [6] = 0;
 		if(GameController.Turn < 200){
@@ -597,6 +669,10 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		return 0;
 	}
 
+	/// <summary>
+	/// Counts the bonus.
+	/// </summary>
+	/// <returns>The bonus.</returns>
 	BrickType CountBonus()
 	{
 		if (currentTurnStreak >= 7) {
@@ -623,6 +699,9 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		return BrickType.Standart;
 	}	
 
+	/// <summary>
+	/// Loads the game.
+	/// </summary>
 	public void LoadGame(){
 
 		string currentGame = GameController.LoadGameData();
@@ -667,6 +746,9 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		}
 	}
 
+	/// <summary>
+	/// Saves the game.
+	/// </summary>
 	public void SaveGame()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -693,9 +775,15 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	}
 
 }
-	
+
+/// <summary>
+/// I has turn ended.
+/// </summary>
 namespace UnityEngine.EventSystems
 {
+	/// <summary>
+	/// I has turn ended.
+	/// </summary>
 	public interface IHasTurnEnded : IEventSystemHandler
 	{
 		void HasTurnEnded(GameObject go);

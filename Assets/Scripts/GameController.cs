@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+/// <summary>
+/// Skills.
+/// </summary>
 public enum Skills{
 	Bomb = 0,
 	Electric = 1,
@@ -13,6 +16,9 @@ public enum Skills{
 	Double = 3
 };
 
+/// <summary>
+/// Sound pool.
+/// </summary>
 public enum SoundPool
 {
 	PutBlock,
@@ -26,19 +32,36 @@ public enum SoundPool
 	Skull
 };
 
+/// <summary>
+/// Game controller.
+/// </summary>
 public static class GameController {
  
 	public static int IsFirstGame = 0;
 
 	private static List<int> skills;
+	/// <summary>
+	/// Gets the skill level.
+	/// </summary>
+	/// <returns>The skill level.</returns>
+	/// <param name="index">Index.</param>
 	public static int GetSkillLevel(Skills index){
 		return skills [(int)index];
 	}
 
+	/// <summary>
+	/// Removes the skill.
+	/// </summary>
+	/// <returns><c>true</c>, if skill was removed, <c>false</c> otherwise.</returns>
+	/// <param name="index">Index.</param>
 	public static bool RemoveSkill(Skills index){
 		return skills.Remove((int)index);
 	}
 
+	/// <summary>
+	/// Adds the skill.
+	/// </summary>
+	/// <param name="index">Index.</param>
 	public static void AddSkill(Skills index){
 		skills.Add((int)index);
 	}
@@ -74,6 +97,9 @@ public static class GameController {
 	public static int DESIGN_OLD = 0;
 	public static int DESIGN_NEW = 1;
 
+	/// <summary>
+	/// Inits the global settings.
+	/// </summary>
 	public static void InitGlobalSettings()
 	{		
 		LoadUserData ();
@@ -98,16 +124,27 @@ public static class GameController {
 		isInitialized = true;
 	}
 
+	/// <summary>
+	/// Sets the user interface manager.
+	/// </summary>
+	/// <param name="manager">Manager.</param>
 	public static void SetUIManager (UIManagerScript manager)
 	{
 		UIManager = manager;
 	}
 
+	/// <summary>
+	/// Sets the level editor.
+	/// </summary>
+	/// <param name="levelEditor">Level editor.</param>
 	public static void SetLevelEditor(LevelEditor levelEditor)
 	{
 		LevelEditor = levelEditor;
 	}
 
+	/// <summary>
+	/// Ends the game.
+	/// </summary>
 	public static void EndGame()
 	{
 		if (IsSecondChanceUsed == 0) {
@@ -119,7 +156,9 @@ public static class GameController {
 		}
 	}
 
-
+	/// <summary>
+	/// Starts the game.
+	/// </summary>
 	public static void StartGame()
 	{
 		IsSecondChanceUsed = 0;
@@ -127,16 +166,26 @@ public static class GameController {
 		LevelEditor.StartGame ();
 	}
 
+	/// <summary>
+	/// Continues the game.
+	/// </summary>
 	public static void ContinueGame()
 	{
 		LevelEditor.ContinueGame ();
 	}
 
+	/// <summary>
+	/// Switchs the sound settings.
+	/// </summary>
 	public static void SwitchSoundSettings()
 	{
 		Sound = (Sound == 1) ? 0 : 1;
 	}
 
+	/// <summary>
+	/// Tries the play sound.
+	/// </summary>
+	/// <param name="sound">Sound.</param>
 	public static void TryPlaySound(SoundPool sound)
 	{
 		if (Sound == 1) {
@@ -171,11 +220,17 @@ public static class GameController {
 		}
 	}
 
+	/// <summary>
+	/// Switchs the music settings.
+	/// </summary>
 	public static void SwitchMusicSettings()
 	{
 		Music = (Music == 1) ? 0 : 1;
 	}
-	
+
+	/// <summary>
+	/// Corrects the music.
+	/// </summary>
 	public static void CorrectMusic()
 	{
 		if (Music == 1)
@@ -184,17 +239,26 @@ public static class GameController {
 			MusicSource.Stop ();
 	}
 
+	/// <summary>
+	/// Switchs the design settings.
+	/// </summary>
 	public static void SwitchDesignSettings()
 	{
 		Design = (Design == DESIGN_NEW) ? DESIGN_OLD : DESIGN_NEW;
 		Dump.LoadColors ();
 	}
 
+	/// <summary>
+	/// Switchs the effects settings.
+	/// </summary>
 	public static void SwitchEffectsSettings()
 	{
 		Effects = (Effects == 1) ? 0 : 1;
 	}
 
+	/// <summary>
+	/// Loads the user data.
+	/// </summary>
 	public static void LoadUserData()
 	{
 		Sound = (PlayerPrefs.HasKey ("sound")) ? PlayerPrefs.GetInt ("sound") : 1;
@@ -209,6 +273,9 @@ public static class GameController {
 		IntersistialCount = (PlayerPrefs.HasKey ("intersistial")) ? PlayerPrefs.GetInt ("intersistial") : 0;
 	}
 
+	/// <summary>
+	/// Saves the user data.
+	/// </summary>
 	public static void SaveUserData()
 	{
 		PlayerPrefs.SetInt ("sound", Sound);
@@ -223,17 +290,28 @@ public static class GameController {
 		PlayerPrefs.Save ();
 	}
 
+	/// <summary>
+	/// Saves the coins.
+	/// </summary>
 	public static void SaveCoins(){
 		PlayerPrefs.SetInt ("coins", Coins);
 		PlayerPrefs.Save ();
 	}
 
+	/// <summary>
+	/// Saves the first game.
+	/// </summary>
 	public static void SaveFirstGame()
 	{
 		PlayerPrefs.SetInt ("first_game", IsFirstGame);
 		PlayerPrefs.Save ();
 	}
 
+	/// <summary>
+	/// Parses the skills.
+	/// </summary>
+	/// <returns>The skills.</returns>
+	/// <param name="str">String.</param>
 	public static List<int> ParseSkills(string str){
 		if (str == "")
 			return null;
@@ -244,6 +322,11 @@ public static class GameController {
 		return res;
 	}
 
+	/// <summary>
+	/// Builds the skills string.
+	/// </summary>
+	/// <returns>The skills string.</returns>
+	/// <param name="buf">Buffer.</param>
 	public static string BuildSkillsString(List<int> buf){
 		StringBuilder sb = new StringBuilder ();
 		if (buf.Count == 0)
@@ -254,17 +337,29 @@ public static class GameController {
 		return sb.ToString ();
 	}
 
-
+	/// <summary>
+	/// Loads the game data.
+	/// </summary>
+	/// <returns>The game data.</returns>
 	public static string LoadGameData(){
 		if (PlayerPrefs.HasKey ("gamedata"))
 			return PlayerPrefs.GetString ("gamedata");
 		return null;
 	}
 
+	/// <summary>
+	/// Saves the game data.
+	/// </summary>
+	/// <param name="data">Data.</param>
 	public static void SaveGameData(string data){
 		PlayerPrefs.SetString ("gamedata", data);
 	}
 
+	/// <summary>
+	/// Gets the level value.
+	/// </summary>
+	/// <returns>The level value.</returns>
+	/// <param name="skill">Skill.</param>
 	public static float GetLevelValue (Skills skill){
 		if (skill == Skills.Bomb) {
 			if (GetSkillLevel (Skills.Bomb) == 0)
@@ -309,11 +404,18 @@ public static class GameController {
 		return 0;
 	}
 
+	/// <summary>
+	/// Ups the skill level.
+	/// </summary>
+	/// <param name="skill">Skill.</param>
 	public static void UpSkillLevel(Skills skill)
 	{
 		skills [(int)skill]++;
 	}
 
+	/// <summary>
+	/// Inits the skill costs.
+	/// </summary>
 	public static void InitSkillCosts()
 	{
 		costs = new int[4][];
@@ -333,6 +435,12 @@ public static class GameController {
 
 	}
 
+	/// <summary>
+	/// Gets the skill price.
+	/// </summary>
+	/// <returns>The skill price.</returns>
+	/// <param name="skill">Skill.</param>
+	/// <param name="currentLevel">Current level.</param>
 	public static int GetSkillPrice(Skills skill, int currentLevel)
 	{
 		if (currentLevel == 4)
@@ -341,12 +449,19 @@ public static class GameController {
 		return costs[(int) skill][currentLevel];
 	}
 
-
+	/// <summary>
+	/// Determines if is initialized.
+	/// </summary>
+	/// <returns><c>true</c> if is initialized; otherwise, <c>false</c>.</returns>
 	public static bool IsInitialized()
 	{
 		return isInitialized;
 	}
 
+	/// <summary>
+	/// Shows the second chance video ad.
+	/// </summary>
+	/// <returns><c>true</c>, if second chance video ad was shown, <c>false</c> otherwise.</returns>
 	public static bool ShowSecondChanceVideoAd()
 	{
 		if (IsAdLoaded()) {
@@ -358,6 +473,10 @@ public static class GameController {
 		//return true;
 	}
 
+	/// <summary>
+	/// Shows the buy coins video ad.
+	/// </summary>
+	/// <returns><c>true</c>, if buy coins video ad was shown, <c>false</c> otherwise.</returns>
 	public static bool ShowBuyCoinsVideoAd()
 	{
 		if (IsAdLoaded()){
@@ -366,11 +485,17 @@ public static class GameController {
 		return false;
 	}
 
+	/// <summary>
+	/// Closes the second chance menu.
+	/// </summary>
 	public static void CloseSecondChanceMenu()
 	{
 		UIManager.CloseSecondChanceMenu ();
 	}
 
+	/// <summary>
+	/// Shows the interstitial ad.
+	/// </summary>
 	public static void ShowInterstitialAd()
 	{
 		IntersistialCount++;
@@ -380,17 +505,22 @@ public static class GameController {
 		}
 	}
 
+	/// <summary>
+	/// Gets the coins for ad.
+	/// </summary>
 	public static void GetCoinsForAd()
 	{
 		Coins += COINS_FOR_AD;
 		UIManager.UpdateShopMenu ();
 	}
 
+	/// <summary>
+	/// Determines if is ad loaded.
+	/// </summary>
+	/// <returns><c>true</c> if is ad loaded; otherwise, <c>false</c>.</returns>
 	public static bool IsAdLoaded()
 	{
 		return adManager.IsVideoAdLoaded ();
 	}
-
-
 }
 

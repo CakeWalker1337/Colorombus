@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Background move.
+/// </summary>
 public class BackgroundMove : MonoBehaviour {
 
 	private Vector3 pos;

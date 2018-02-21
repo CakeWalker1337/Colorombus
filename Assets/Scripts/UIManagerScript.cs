@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// User interface manager script.
+/// </summary>
 public class UIManagerScript : MonoBehaviour {
 
 
@@ -37,6 +40,9 @@ public class UIManagerScript : MonoBehaviour {
 	private bool isReturnerRun = false;
 	private bool exitRequested = false;
 
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
 	void Start()
 	{
 		if (SceneManager.GetActiveScene ().name.Equals ("menu_scene")) 
@@ -120,6 +126,9 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.SetUIManager (this);
 	}
 
+	/// <summary>
+	/// Update this instance.
+	/// </summary>
 	void Update()
 	{
 		/*
@@ -189,6 +198,10 @@ public class UIManagerScript : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Sets the exit timer for app.
+	/// </summary>
+	/// <returns>The exit timer.</returns>
 	IEnumerator AppExit_Timer()
 	{
 		if (!exitRequested) {
@@ -207,6 +220,9 @@ public class UIManagerScript : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// The options button callback.
+	/// </summary>
 	public void OptionsButton_Callback()
 	{
 		mainMenu.SetActive (false);
@@ -215,6 +231,9 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.TryPlaySound (SoundPool.Button);
 	}
 
+	/// <summary>
+	/// The credits button callback.
+	/// </summary>
 	public void CreditsButton_Callback()
 	{
 		mainMenu.SetActive (false);
@@ -225,7 +244,9 @@ public class UIManagerScript : MonoBehaviour {
 	///
 
 	//Pause Menu
-	//
+	/// <summary>
+	/// The pause menu button callback.
+	/// </summary>
 	public void PauseMenuButton_Callback()
 	{
 		GameController.TryPlaySound (SoundPool.Button);
@@ -234,12 +255,19 @@ public class UIManagerScript : MonoBehaviour {
 		StartCoroutine (PauseMenuOpen_Timer ());
 	}
 
+	/// <summary>
+	/// The pause menu open timer.
+	/// </summary>
+	/// <returns>The menu open timer.</returns>
 	IEnumerator PauseMenuOpen_Timer()
 	{
 		yield return new WaitForSeconds (0.33f);
 		currentMenu = 2;
 	}
 
+	/// <summary>
+	/// The Continue button callback.
+	/// </summary>
 	public void ContinueButton_Callback()
 	{
 		GameController.TryPlaySound (SoundPool.Button);
@@ -247,12 +275,19 @@ public class UIManagerScript : MonoBehaviour {
 		ClosePauseMenu ();
 	}
 
+	/// <summary>
+	/// Closes the pause menu.
+	/// </summary>
 	public void ClosePauseMenu()
 	{
 		pauseMenu.GetComponent<Animator> ().Play ("close");
 		StartCoroutine (PauseMenuClose_Timer ());
 	}
 
+	/// <summary>
+	/// Pauses the menu close timer.
+	/// </summary>
+	/// <returns>The menu close timer.</returns>
 	IEnumerator PauseMenuClose_Timer()
 	{
 		yield return new WaitForSeconds (0.33f);
@@ -264,6 +299,9 @@ public class UIManagerScript : MonoBehaviour {
 	//Game Over Menu
 	//
 
+	/// <summary>
+	/// Opens the game over menu.
+	/// </summary>
 	public void OpenGameOverMenu()
 	{
 		gameOverMenu.SetActive (true);
@@ -276,18 +314,28 @@ public class UIManagerScript : MonoBehaviour {
 		currentMenu = 3;
 	}
 
+	/// <summary>
+	/// Games the over retry button callback.
+	/// </summary>
 	public void GameOverRetryButton_Callback()
 	{
 		GameController.TryPlaySound (SoundPool.Button);
 		CloseGameOverMenu ();
 	}
 
+	/// <summary>
+	/// Closes the game over menu.
+	/// </summary>
 	public void CloseGameOverMenu()
 	{
 		gameOverMenu.GetComponent<Animator> ().Play ("close");
 		StartCoroutine (GameOverMenuClose_Timer ());
 	}
 
+	/// <summary>
+	/// Games the over menu close timer.
+	/// </summary>
+	/// <returns>The over menu close timer.</returns>
 	IEnumerator GameOverMenuClose_Timer()
 	{
 		yield return new WaitForSeconds (1.0f);
@@ -298,7 +346,9 @@ public class UIManagerScript : MonoBehaviour {
 	///
 
 	//Second Chance Menu
-	//
+	/// <summary>
+	/// Opens the second chance menu.
+	/// </summary>
 	public void OpenSecondChanceMenu()
 	{
 		GameController.IsSecondChanceUsed = 1;
@@ -318,6 +368,9 @@ public class UIManagerScript : MonoBehaviour {
 		StartCountdown ();
 	}
 
+	/// <summary>
+	/// the Second chance show ad button callback.
+	/// </summary>
 	public void SecondChanceShowAdButton_Callback()
 	{
 		GameController.TryPlaySound (SoundPool.Button);
@@ -328,6 +381,9 @@ public class UIManagerScript : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// the Second chance close button callback.
+	/// </summary>
 	public void SecondChanceCloseButton_Callback()
 	{
 		GameController.TryPlaySound (SoundPool.Button);
@@ -335,6 +391,9 @@ public class UIManagerScript : MonoBehaviour {
 		OpenGameOverMenu ();
 	}
 
+	/// <summary>
+	/// Closes the second chance menu.
+	/// </summary>
 	public void CloseSecondChanceMenu()
 	{
 		currentMenu = -1;
@@ -343,12 +402,19 @@ public class UIManagerScript : MonoBehaviour {
 		StartCoroutine (SecondChanceMenuClose_Timer ());
 	}
 
+	/// <summary>
+	/// The second chance menu close timer.
+	/// </summary>
+	/// <returns>The chance menu close timer.</returns>
 	IEnumerator SecondChanceMenuClose_Timer()
 	{
 		yield return new WaitForSeconds (1.0f);
 		secondChanceMenu.SetActive (false);
 	}
 
+	/// <summary>
+	/// Starts the countdown.
+	/// </summary>
 	private void StartCountdown()
 	{
 		Text timerText = GameObject.Find ("Countdown").GetComponent<Text>();
@@ -356,6 +422,12 @@ public class UIManagerScript : MonoBehaviour {
 		StartCoroutine (CountdownTimer (10, timerText));
 	}
 
+	/// <summary>
+	/// The Countdoun timer.
+	/// </summary>
+	/// <returns>The timer.</returns>
+	/// <param name="remain">Remain.</param>
+	/// <param name="timerText">Timer text.</param>
 	IEnumerator CountdownTimer(int remain, Text timerText)
 	{
 		yield return new WaitForSeconds (1.0f);
@@ -552,6 +624,10 @@ public class UIManagerScript : MonoBehaviour {
 		currentMenu = 6;
 	}
 
+	/// <summary>
+	/// Fills the info in description of items.
+	/// </summary>
+	/// <param name="skill">Skill.</param>
 	public void FillInfo(Skills skill)
 	{
 		switch (skill) {
@@ -711,6 +787,10 @@ public class UIManagerScript : MonoBehaviour {
 		adError.SetActive (true);
 	}
 
+	/// <summary>
+	/// Updates the skill info.
+	/// </summary>
+	/// <param name="skill">Skill.</param>
 	public void UpdateSkillInfo(Skills skill)
 	{
 		int price;
@@ -753,11 +833,17 @@ public class UIManagerScript : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Updates the shop balance.
+	/// </summary>
 	private void UpdateShopBalance()
 	{
 		GameObject.Find ("BalanceText").GetComponent<Text>().text = GameController.Coins.ToString();
 	}
 
+	/// <summary>
+	/// Updates the shop menu.
+	/// </summary>
 	public void UpdateShopMenu()
 	{
 		if (GameController.IsAdLoaded ())
@@ -773,6 +859,12 @@ public class UIManagerScript : MonoBehaviour {
 		UpdateSkillInfo (Skills.Double);
 	}
 
+	/// <summary>
+	/// Applies the price.
+	/// </summary>
+	/// <param name="price">Price.</param>
+	/// <param name="button">Button.</param>
+	/// <param name="text">Text.</param>
 	private void ApplyPrice(int price, GameObject button, Text text)
 	{
 		if (price == -1) {

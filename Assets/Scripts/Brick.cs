@@ -74,6 +74,11 @@ public class Brick {
 		}
 	}
 
+	/// <summary>
+	/// Initializes a new instance of the <see cref="Brick"/> class.
+	/// </summary>
+	/// <param name="bt">Bt.</param>
+	/// <param name="bc">Bc.</param>
 	public Brick(BrickType bt, BrickColor bc){
 		brick = new GameObject();
 		brick.layer = 5;
@@ -128,6 +133,11 @@ public class Brick {
 
 	}
 
+	/// <summary>
+	/// Picks the color of the brick.
+	/// </summary>
+	/// <returns>The brick color.</returns>
+	/// <param name="bc">Bc.</param>
 	private Color PickBrickColor(BrickColor bc)
 	{
 		int res = -1;
@@ -156,6 +166,11 @@ public class Brick {
 		}
 	}
 
+	/// <summary>
+	/// Gets the color of the brick.
+	/// </summary>
+	/// <returns>The brick color.</returns>
+	/// <param name="brick">Brick.</param>
 	public static BrickColor GetBrickColor(GameObject brick){
 		Color c = brick.GetComponent<Image> ().color;
 		if (c == new Color ())
@@ -177,6 +192,11 @@ public class Brick {
 		return BrickColor.Error;
 	}
 
+	/// <summary>
+	/// Gets the type of the brick.
+	/// </summary>
+	/// <returns>The brick type.</returns>
+	/// <param name="brick">Brick.</param>
 	public static BrickType GetBrickType(GameObject brick){
 		if (brick.transform.childCount == 0)
 			return BrickType.Standart;

@@ -1,15 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Dump.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LevelEditor.cs">
     <Files>
-      <File FileName="Assets\Scripts\LevelEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragAndDrop\DragHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragAndDrop\Slot.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BackgroundMove.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UIManagerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Dump.cs" Line="101" Column="41" />
-      <File FileName="Assets\Scripts\Brick.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelEditor.cs" Line="267" Column="32" />
+      <File FileName="Assets\Scripts\DragAndDrop\DragHandler.cs" Line="61" Column="6" />
+      <File FileName="Assets\Scripts\DragAndDrop\Slot.cs" Line="9" Column="24" />
+      <File FileName="Assets\Scripts\BackgroundMove.cs" Line="7" Column="15" />
+      <File FileName="Assets\Scripts\GameController.cs" Line="524" Column="3" />
+      <File FileName="Assets\Scripts\UIManagerScript.cs" Line="881" Column="2" />
+      <File FileName="Assets\Scripts\Dump.cs" Line="99" Column="2" />
+      <File FileName="Assets\Scripts\Brick.cs" Line="196" Column="6" />
+      <File FileName="Assets\Scripts\AdManager.cs" Line="98" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

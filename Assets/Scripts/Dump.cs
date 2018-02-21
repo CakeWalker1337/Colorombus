@@ -97,6 +97,9 @@ public class Dump : MonoBehaviour {
 		LoadColors ();
 	}
 
+	/// <summary>
+	/// Loads the colors.
+	/// </summary>
 	public static void LoadColors()
 	{
 		if (GameController.Design == GameController.DESIGN_NEW) {

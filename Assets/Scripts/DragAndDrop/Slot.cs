@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+/// <summary>
+/// Slot.
+/// </summary>
 public class Slot : MonoBehaviour, IDropHandler{
 	public GameObject item
 	{
@@ -16,6 +19,10 @@ public class Slot : MonoBehaviour, IDropHandler{
 
 
 	#region IDropHandler implementation
+	/// <summary>
+	/// Raises the drop event.
+	/// </summary>
+	/// <param name="eventData">Event data.</param>
 	public void OnDrop (PointerEventData eventData)
 	{
 		if (DragHandler.itemBeingDragged == null)

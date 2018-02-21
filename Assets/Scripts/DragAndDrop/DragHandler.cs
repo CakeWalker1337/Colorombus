@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Drag handler.
+/// </summary>
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
 	public static GameObject itemBeingDragged;
@@ -12,6 +15,10 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	private bool isDraggedOnce = false;
 
 	#region IBeginDragHandler implementation
+	/// <summary>
+	/// Raises the begin drag event.
+	/// </summary>
+	/// <param name="eventData">Event data.</param>
 	public void OnBeginDrag (PointerEventData eventData)
 	{
 		if (isDraggedOnce)
@@ -29,6 +36,10 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	#region IDragHandler implementation
 
+	/// <summary>
+	/// Raises the drag event.
+	/// </summary>
+	/// <param name="eventData">Event data.</param>
 	public void OnDrag (PointerEventData eventData)
 	{
 		if (isDraggedOnce)
@@ -46,6 +57,10 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	#region IEndDragHandler implementation
 
+	/// <summary>
+	/// Raises the end drag event.
+	/// </summary>
+	/// <param name="eventData">Event data.</param>
 	public void OnEndDrag (PointerEventData eventData)
 	{
 		if (isDraggedOnce)
