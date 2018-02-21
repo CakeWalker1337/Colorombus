@@ -3,7 +3,7 @@
 
 Prepare your mind for relax! Get ready to break your stereotype about light games. No one game gives you more comfort time spending, than Colorumbus. This game is a perfect solution for relax and time killing, with fantastic atmosphere, which make your feel more pleasant.
 
-========================================================================================================================================
+---
 
 Готов дать передышку своему разуму? Разрушь стереотип про игры-однодневки! Ни одна игра не сделает твое времяпрепровождение приятнее, чем Colorumbus. Эта игра – превосходное решение для расслабления и убийства времени, сочетающее в себе приятную атмосферу, уникальную, и вместе с этим простую идею, незамысловатый геймплей, а также восхитительную графику. Это та игра, которая позволит отвлечься от повседневной суеты и окунуться в приятную атмосферу. Попробуй сам!
 
@@ -11,7 +11,7 @@ Prepare your mind for relax! Get ready to break your stereotype about light game
 
 You should break color blocks, which has same color, until all field will be filled, and get maximum score. Secondary, you can collect Colorumbus Coins (CC). Blocks with CC spawns on the field time to time. They have a special icon inside block. You can use CC for upgrading skills in shop.
 
-=========================================================================================================================================
+---
 
 Разрушай блоки одинакового цвета, пока поле не заполнится, зарабатывай очки и иди на рекорд! Также в процессе игры могут появляться особые блоки. Внутри них располагается эмблема Colorombus Coins (CC). Разбивай их, зарабатывай CC и прокачивай новые умения!
 
@@ -31,7 +31,7 @@ You should break color blocks, which has same color, until all field will be fil
 Also, you can make some bonuses on the field. Break FIVE blocks with same color and you will get a BOMB bonus. If you break SIX blocks with same color, you will get a LASER bonus! And if you break SEVEN blocks with same color, you will get a SKULL bonus Try it yourself!
 </aside>
 
-=======================================================================================================================================
+---
 
 * Бомба – создает на поле блок с бомбой, который разрушает все блоки в радиусе 2 блоков. Прокачка умения влияет на шанс выпадения бомбы на поле. На 4 уровне прокачки появляется 50%-ый шанс создания Супер-бомбы, которая взрывает все блоки в радиусе 3 блоков!
 
@@ -47,11 +47,24 @@ Also, you can make some bonuses on the field. Break FIVE blocks with same color 
 Также ты можешь собрать бонусы прямо на поле! Если разрушить 4 блока одного цвета, ты получишь бонус-бомбу, а если уничтожишь 5 блоков одного цвета, получишь лазер. Попробуй сам!
 </aside>
 
+## Screenshots / Скриншоты
+
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen1_en.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen1_ru.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen2_en.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen3_ru.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen3_en.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen3_ru.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen4_en.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen4_ru.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen5_en.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen5_ru.jpg)
+
 ## Others / В остальном
 
 10XGames team pleased, that you join our colorumbus-community! Have fun!
 
-========================================================================
+---
 
 Команда 10XGames счастлива, что ты присоединился к нашему colorombus-сообществу! Веселись от души!
 
