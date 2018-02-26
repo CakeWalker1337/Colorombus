@@ -34,8 +34,8 @@ namespace AppodealAds.Unity.Android
 			listener.onRewardedVideoFinished(amount, name);
 		}
 		
-		void onRewardedVideoClosed(bool finished) {
-			listener.onRewardedVideoClosed(finished);
+		void OnRewardedVideoClosed(bool finished) {
+			listener.OnRewardedVideoClosed(finished);
 		}
 
 	}

@@ -19,8 +19,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	/// Raises the begin drag event.
 	/// </summary>
 	/// <param name="eventData">Event data.</param>
-	public void OnBeginDrag (PointerEventData eventData)
-	{
+	public void OnBeginDrag (PointerEventData eventData){
 		if (isDraggedOnce)
 			return;
 		if (isAnyBlockPicked)
@@ -40,8 +39,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	/// Raises the drag event.
 	/// </summary>
 	/// <param name="eventData">Event data.</param>
-	public void OnDrag (PointerEventData eventData)
-	{
+	public void OnDrag (PointerEventData eventData){
 		if (isDraggedOnce)
 			return;
 		if (itemBeingDragged != gameObject)
@@ -61,14 +59,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	/// Raises the end drag event.
 	/// </summary>
 	/// <param name="eventData">Event data.</param>
-	public void OnEndDrag (PointerEventData eventData)
-	{
+	public void OnEndDrag (PointerEventData eventData){
 		if (isDraggedOnce)
 			return;
 		itemBeingDragged = null;
 		GetComponent<CanvasGroup> ().blocksRaycasts = true;
 		if (transform.parent == startParent) {
-			for (int i = 0; i < LevelEditor.ItemGrid.childCount; i++) {
+			for (var i = 0; i < LevelEditor.ItemGrid.childCount; i++) {
 				if (LevelEditor.ItemGrid.GetChild (i).childCount == 0) {
 					transform.SetParent(LevelEditor.ItemGrid.GetChild(i));
 					isAnyBlockPicked = false;

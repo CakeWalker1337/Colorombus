@@ -43,10 +43,8 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Start this instance.
 	/// </summary>
-	void Start()
-	{
-		if (SceneManager.GetActiveScene ().name.Equals ("menu_scene")) 
-		{
+	void Start(){
+		if (SceneManager.GetActiveScene ().name.Equals ("menu_scene")) {
 			if (!GameController.IsInitialized())	
 				GameController.InitGlobalSettings ();
 
@@ -76,8 +74,7 @@ public class UIManagerScript : MonoBehaviour {
 			infoMenu.SetActive (false);
 			currentMenu = 0;
 		} 
-		else if (SceneManager.GetActiveScene ().name.Equals ("endless_level")) 
-		{
+		else if (SceneManager.GetActiveScene ().name.Equals ("endless_level")) {
 			pauseMenu = GameObject.Find ("PauseMenu");
 			gameOverMenu = GameObject.Find ("GameOverMenu");
 			secondChanceMenu = GameObject.Find ("SecondChanceMenu");
@@ -87,7 +84,7 @@ public class UIManagerScript : MonoBehaviour {
 
 			howToPlayPages = new List<GameObject> ();
 			GameObject buf;
-			for (int i = 1; i <= 3; i++) {
+			for (var i = 1; i <= 3; i++) {
 				buf = GameObject.Find ("HowToPlay_" + i.ToString ());
 				howToPlayPages.Add (buf);
 				buf.SetActive (false);
@@ -129,8 +126,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Update this instance.
 	/// </summary>
-	void Update()
-	{
+	void Update(){
 		/*
 	 	-1 - None
 		0 - Main
@@ -143,8 +139,7 @@ public class UIManagerScript : MonoBehaviour {
 		7 - Info
 		8 - How to Play
 	*/
-		if (Input.GetKeyDown (KeyCode.Escape)) 
-		{
+		if (Input.GetKeyDown (KeyCode.Escape)) {
 			if (currentMenu == -1) {
 				PauseMenuButton_Callback ();
 			}
@@ -202,8 +197,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// Sets the exit timer for app.
 	/// </summary>
 	/// <returns>The exit timer.</returns>
-	IEnumerator AppExit_Timer()
-	{
+	IEnumerator AppExit_Timer(){
 		if (!exitRequested) {
 			yield return new WaitForSeconds (0.1f);
 			exitRequested = true;
@@ -213,8 +207,7 @@ public class UIManagerScript : MonoBehaviour {
 	}
 
 	// Main Menu
-	public void PlayButton_Callback()
-	{
+	public void PlayButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		SceneManager.LoadScene ("endless_level");
 
@@ -223,8 +216,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// The options button callback.
 	/// </summary>
-	public void OptionsButton_Callback()
-	{
+	public void OptionsButton_Callback(){
 		mainMenu.SetActive (false);
 		optionsMenu.SetActive (true);
 		currentMenu = 1;
@@ -234,8 +226,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// The credits button callback.
 	/// </summary>
-	public void CreditsButton_Callback()
-	{
+	public void CreditsButton_Callback(){
 		mainMenu.SetActive (false);
 		currentMenu = 5;
 		creditsMenu.SetActive (true);
@@ -247,8 +238,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// The pause menu button callback.
 	/// </summary>
-	public void PauseMenuButton_Callback()
-	{
+	public void PauseMenuButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		pauseMenu.SetActive (true);
 		pauseMenu.GetComponent<Animator> ().Play ("open");
@@ -259,8 +249,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// The pause menu open timer.
 	/// </summary>
 	/// <returns>The menu open timer.</returns>
-	IEnumerator PauseMenuOpen_Timer()
-	{
+	IEnumerator PauseMenuOpen_Timer(){
 		yield return new WaitForSeconds (0.33f);
 		currentMenu = 2;
 	}
@@ -268,8 +257,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// The Continue button callback.
 	/// </summary>
-	public void ContinueButton_Callback()
-	{
+	public void ContinueButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.SaveUserData ();
 		ClosePauseMenu ();
@@ -278,8 +266,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Closes the pause menu.
 	/// </summary>
-	public void ClosePauseMenu()
-	{
+	public void ClosePauseMenu(){
 		pauseMenu.GetComponent<Animator> ().Play ("close");
 		StartCoroutine (PauseMenuClose_Timer ());
 	}
@@ -288,8 +275,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// Pauses the menu close timer.
 	/// </summary>
 	/// <returns>The menu close timer.</returns>
-	IEnumerator PauseMenuClose_Timer()
-	{
+	IEnumerator PauseMenuClose_Timer(){
 		yield return new WaitForSeconds (0.33f);
 		pauseMenu.SetActive (false);
 		currentMenu = -1;
@@ -302,8 +288,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Opens the game over menu.
 	/// </summary>
-	public void OpenGameOverMenu()
-	{
+	public void OpenGameOverMenu(){
 		gameOverMenu.SetActive (true);
 		GameObject.Find ("TextScore").GetComponent<Text> ().text = "Score: " + GameController.Score.ToString();
 		GameController.BestScore = Mathf.Max (GameController.BestScore, GameController.Score);
@@ -317,8 +302,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Games the over retry button callback.
 	/// </summary>
-	public void GameOverRetryButton_Callback()
-	{
+	public void GameOverRetryButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		CloseGameOverMenu ();
 	}
@@ -326,8 +310,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Closes the game over menu.
 	/// </summary>
-	public void CloseGameOverMenu()
-	{
+	public void CloseGameOverMenu(){
 		gameOverMenu.GetComponent<Animator> ().Play ("close");
 		StartCoroutine (GameOverMenuClose_Timer ());
 	}
@@ -336,8 +319,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// Games the over menu close timer.
 	/// </summary>
 	/// <returns>The over menu close timer.</returns>
-	IEnumerator GameOverMenuClose_Timer()
-	{
+	IEnumerator GameOverMenuClose_Timer(){
 		yield return new WaitForSeconds (1.0f);
 		gameOverMenu.SetActive (false);
 		currentMenu = -1;
@@ -349,8 +331,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Opens the second chance menu.
 	/// </summary>
-	public void OpenSecondChanceMenu()
-	{
+	public void OpenSecondChanceMenu(){
 		GameController.IsSecondChanceUsed = 1;
 		secondChanceMenu.SetActive (true);
 
@@ -371,8 +352,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// the Second chance show ad button callback.
 	/// </summary>
-	public void SecondChanceShowAdButton_Callback()
-	{
+	public void SecondChanceShowAdButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		if (GameController.ShowSecondChanceVideoAd ()) {
 			CloseSecondChanceMenu ();
@@ -384,8 +364,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// the Second chance close button callback.
 	/// </summary>
-	public void SecondChanceCloseButton_Callback()
-	{
+	public void SecondChanceCloseButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		CloseSecondChanceMenu ();
 		OpenGameOverMenu ();
@@ -394,8 +373,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Closes the second chance menu.
 	/// </summary>
-	public void CloseSecondChanceMenu()
-	{
+	public void CloseSecondChanceMenu(){
 		currentMenu = -1;
 		adError.SetActive (false);
 		secondChanceMenu.GetComponent<Animator> ().Play ("close");
@@ -406,8 +384,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// The second chance menu close timer.
 	/// </summary>
 	/// <returns>The chance menu close timer.</returns>
-	IEnumerator SecondChanceMenuClose_Timer()
-	{
+	IEnumerator SecondChanceMenuClose_Timer(){
 		yield return new WaitForSeconds (1.0f);
 		secondChanceMenu.SetActive (false);
 	}
@@ -415,8 +392,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Starts the countdown.
 	/// </summary>
-	private void StartCountdown()
-	{
+	private void StartCountdown(){
 		Text timerText = GameObject.Find ("Countdown").GetComponent<Text>();
 		timerText.text = "10";
 		StartCoroutine (CountdownTimer (10, timerText));
@@ -428,8 +404,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <returns>The timer.</returns>
 	/// <param name="remain">Remain.</param>
 	/// <param name="timerText">Timer text.</param>
-	IEnumerator CountdownTimer(int remain, Text timerText)
-	{
+	IEnumerator CountdownTimer(int remain, Text timerText){
 		yield return new WaitForSeconds (1.0f);
 		if (currentMenu == 4) {
 			remain--;
@@ -447,8 +422,7 @@ public class UIManagerScript : MonoBehaviour {
 
 	//HowToPlay Menu
 	///
-	public void HowToPlayButton_Callback()
-	{
+	public void HowToPlayButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		currentMenu = 8;
 		howToPlayMenu.SetActive(true);
@@ -456,8 +430,7 @@ public class UIManagerScript : MonoBehaviour {
 		StartCoroutine (HowToPlayMenuOpen_Timer ());
 	}
 
-	public void HowToPlayCloseButton_Callback()
-	{
+	public void HowToPlayCloseButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		currentPage = -1;
 		ChangePage ();
@@ -465,22 +438,19 @@ public class UIManagerScript : MonoBehaviour {
 		StartCoroutine (HowToPlayMenuClose_Timer ());
 	}
 
-	IEnumerator HowToPlayMenuClose_Timer()
-	{
+	IEnumerator HowToPlayMenuClose_Timer(){
 		yield return new WaitForSeconds (1.0f);
 		howToPlayMenu.SetActive (false);
 		currentMenu = -1;
 	}
 
-	IEnumerator HowToPlayMenuOpen_Timer()
-	{
+	IEnumerator HowToPlayMenuOpen_Timer(){
 		yield return new WaitForSeconds (1.0f);
 		currentPage = 1;
 		ChangePage ();
 	}
 
-	public void HowToPlayNextButton_Callback()
-	{
+	public void HowToPlayNextButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 
 		if (currentPage == 3)
@@ -490,8 +460,7 @@ public class UIManagerScript : MonoBehaviour {
 		ChangePage ();
 	}
 
-	public void HowToPlayPrevButton_Callback()
-	{
+	public void HowToPlayPrevButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 
 		if (currentPage == 1)
@@ -501,9 +470,8 @@ public class UIManagerScript : MonoBehaviour {
 		ChangePage ();
 	}
 
-	private void ChangePage()
-	{
-		for (int i = 0; i < 3; i++) {
+	private void ChangePage(){
+		for (var i = 0; i < 3; i++) {
 			if (i == currentPage - 1)
 				howToPlayPages [i].SetActive (true);
 			else
@@ -513,8 +481,7 @@ public class UIManagerScript : MonoBehaviour {
 
 	//Shop Menu
 	///
-	public void ShopBackButton_Callback()
-	{
+	public void ShopBackButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		shopMenu.SetActive (false);
 
@@ -527,8 +494,7 @@ public class UIManagerScript : MonoBehaviour {
 		}
 	}
 
-	public void ShopBuyBombButton_Callback()
-	{
+	public void ShopBuyBombButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Bomb, GameController.GetSkillLevel (Skills.Bomb));
 		GameController.UpSkillLevel (Skills.Bomb);
@@ -536,8 +502,7 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.SaveUserData ();
 	}
 
-	public void ShopBuyLaserButton_Callback()
-	{
+	public void ShopBuyLaserButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Electric, GameController.GetSkillLevel (Skills.Electric));
 		GameController.UpSkillLevel (Skills.Electric);
@@ -545,8 +510,7 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.SaveUserData ();
 	}
 
-	public void ShopBuySkullButton_Callback()
-	{
+	public void ShopBuySkullButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Skull, GameController.GetSkillLevel (Skills.Skull));
 		GameController.UpSkillLevel (Skills.Skull);
@@ -554,8 +518,7 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.SaveUserData ();
 	}
 
-	public void ShopBuyDoubleCoinsButton_Callback()
-	{
+	public void ShopBuyDoubleCoinsButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.Coins -= GameController.GetSkillPrice (Skills.Double, GameController.GetSkillLevel (Skills.Double));
 		GameController.UpSkillLevel (Skills.Double);
@@ -563,32 +526,27 @@ public class UIManagerScript : MonoBehaviour {
 		GameController.SaveUserData ();
 	}
 
-	public void ShopBombInfoButton_Callback ()
-	{
+	public void ShopBombInfoButton_Callback (){
 		GameController.TryPlaySound (SoundPool.Button);
 		OpenInfoMenu (Skills.Bomb);
 	}
 
-	public void ShopLaserInfoButton_Callback ()
-	{
+	public void ShopLaserInfoButton_Callback (){
 		GameController.TryPlaySound (SoundPool.Button);
 		OpenInfoMenu (Skills.Electric);
 	}
 
-	public void ShopSkullInfoButton_Callback ()
-	{
+	public void ShopSkullInfoButton_Callback (){
 		GameController.TryPlaySound (SoundPool.Button);
 		OpenInfoMenu (Skills.Skull);
 	}
 
-	public void ShopDoubleInfoButton_Callback ()
-	{
+	public void ShopDoubleInfoButton_Callback (){
 		GameController.TryPlaySound (SoundPool.Button);
 		OpenInfoMenu (Skills.Double);
 	}
 
-	public void ShopBuyCoinsForAdButton_Callback()
-	{
+	public void ShopBuyCoinsForAdButton_Callback(){
 		GameController.ShowBuyCoinsVideoAd ();
 	}
 
@@ -597,28 +555,24 @@ public class UIManagerScript : MonoBehaviour {
 	//Info Menu
 	///
 
-	public void InfoCloseButton_Callback()
-	{
+	public void InfoCloseButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		CloseInfoMenu ();
 	}
 
-	public void OpenInfoMenu(Skills skill)
-	{
+	public void OpenInfoMenu(Skills skill){
 		infoMenu.SetActive (true);
 		FillInfo (skill);
 		infoMenu.GetComponent<Animator> ().Play ("open");
 		currentMenu = 7;
 	}
 
-	public void CloseInfoMenu ()
-	{
+	public void CloseInfoMenu (){
 		infoMenu.GetComponent<Animator> ().Play ("close");
 		StartCoroutine (InfoMenuClose_Timer ());
 	}
 
-	IEnumerator InfoMenuClose_Timer()
-	{
+	IEnumerator InfoMenuClose_Timer(){
 		yield return new WaitForSeconds (1.0f);
 		infoMenu.SetActive (false);
 		currentMenu = 6;
@@ -628,8 +582,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// Fills the info in description of items.
 	/// </summary>
 	/// <param name="skill">Skill.</param>
-	public void FillInfo(Skills skill)
-	{
+	public void FillInfo(Skills skill){
 		switch (skill) {
 
 		case Skills.Bomb:
@@ -693,8 +646,7 @@ public class UIManagerScript : MonoBehaviour {
 
 	//Other Callbacks
 	///
-	public void SoundButton_Callback()
-	{
+	public void SoundButton_Callback(){
 		GameController.SwitchSoundSettings ();
 		GameController.TryPlaySound (SoundPool.Button);
 
@@ -702,8 +654,7 @@ public class UIManagerScript : MonoBehaviour {
 		img.sprite = (GameController.Sound == 1)? Dump.soundOnSprite : Dump.soundOffSprite;
 	}
 
-	public void MusicButton_Callback()
-	{
+	public void MusicButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.SwitchMusicSettings ();
 		GameController.CorrectMusic ();
@@ -713,8 +664,7 @@ public class UIManagerScript : MonoBehaviour {
 
 	}
 
-	public void EffectsButton_Callback()
-	{
+	public void EffectsButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.SwitchEffectsSettings ();
 
@@ -722,8 +672,7 @@ public class UIManagerScript : MonoBehaviour {
 		img.sprite = (GameController.Effects == 1)? Dump.effectsOnSprite : Dump.effectsOffSprite;
 	}
 
-	public void DesignButton_Callback()
-	{
+	public void DesignButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.SwitchDesignSettings ();
 
@@ -731,8 +680,7 @@ public class UIManagerScript : MonoBehaviour {
 		img.sprite = (GameController.Design == GameController.DESIGN_NEW)? Dump.newRectSprite : Dump.oldRectSprite;
 	}
 
-	public void BackButton_Callback()
-	{
+	public void BackButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.SaveUserData ();
 		optionsMenu.SetActive (false);
@@ -741,15 +689,13 @@ public class UIManagerScript : MonoBehaviour {
 		currentMenu = 0;
 	}
 
-	public void RateButton_Callback()
-	{
+	public void RateButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		//Open Rate URL
 		Application.OpenURL("https://play.google.com/store/apps/details?id=com.tenxgames.colorumbus");
 	}
 
-	public void HomeButton_Callback()
-	{
+	public void HomeButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		GameController.IsGameStarted = 0;
 		GameController.SaveUserData ();
@@ -759,31 +705,25 @@ public class UIManagerScript : MonoBehaviour {
 		SceneManager.LoadScene ("menu_scene");
 	}
 
-	public void ShopButton_Callback()
-	{
+	public void ShopButton_Callback(){
 		GameController.TryPlaySound (SoundPool.Button);
 		//Shop
 		currentMenu = 6;
 		shopMenu.SetActive(true);
-
-		
 		UpdateShopMenu ();
 	}
 
-	private void DisableButton(GameObject button)
-	{
+	private void DisableButton(GameObject button){
 		button.GetComponent<Button>().interactable = false;
 		button.GetComponent<Image>().color = new Color (0.7647f, 0.7647f, 0.7647f);
 	}
 
-	private void EnableButton(GameObject button)
-	{
+	private void EnableButton(GameObject button){
 		button.GetComponent<Button>().interactable = true;
 		button.GetComponent<Image>().color = new Color (0.6588f, 0.9333f, 0.6823f);
 	}
 
-	public void ShowFailAd()
-	{
+	public void ShowFailAd(){
 		adError.SetActive (true);
 	}
 
@@ -791,8 +731,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// Updates the skill info.
 	/// </summary>
 	/// <param name="skill">Skill.</param>
-	public void UpdateSkillInfo(Skills skill)
-	{
+	public void UpdateSkillInfo(Skills skill){
 		int price;
 		switch (skill) {
 
@@ -836,16 +775,14 @@ public class UIManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Updates the shop balance.
 	/// </summary>
-	private void UpdateShopBalance()
-	{
+	private void UpdateShopBalance(){
 		GameObject.Find ("BalanceText").GetComponent<Text>().text = GameController.Coins.ToString();
 	}
 
 	/// <summary>
 	/// Updates the shop menu.
 	/// </summary>
-	public void UpdateShopMenu()
-	{
+	public void UpdateShopMenu(){
 		if (GameController.IsAdLoaded ())
 			EnableButton (GameObject.Find ("Button_CoinsForAd"));
 		else
@@ -865,8 +802,7 @@ public class UIManagerScript : MonoBehaviour {
 	/// <param name="price">Price.</param>
 	/// <param name="button">Button.</param>
 	/// <param name="text">Text.</param>
-	private void ApplyPrice(int price, GameObject button, Text text)
-	{
+	private void ApplyPrice(int price, GameObject button, Text text){
 		if (price == -1) {
 			DisableButton (button);
 			text.text = "MAX";
@@ -879,8 +815,7 @@ public class UIManagerScript : MonoBehaviour {
 		}
 	}
 
-	public void WaitDelay()
-	{	
+	public void WaitDelay(){	
 		if (isReturnerRun == false)
 			isReturnerRun = true;
 			StartCoroutine (Waiter ());

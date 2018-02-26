@@ -100,8 +100,7 @@ public class Dump : MonoBehaviour {
 	/// <summary>
 	/// Loads the colors.
 	/// </summary>
-	public static void LoadColors()
-	{
+	public static void LoadColors(){
 		if (GameController.Design == GameController.DESIGN_NEW) {
 			RedColor = new Color (1f, 0.388f, 0.278f);
 			OrangeColor = new Color (0.91f, 0.64f, 0.23f);

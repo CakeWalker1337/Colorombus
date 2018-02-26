@@ -6,10 +6,8 @@ using UnityEngine.EventSystems;
 /// Slot.
 /// </summary>
 public class Slot : MonoBehaviour, IDropHandler{
-	public GameObject item
-	{
-		get
-		{
+	public GameObject item{
+		get{
 			if (transform.childCount > 0) {
 				return transform.GetChild (0).gameObject;
 			}
@@ -23,8 +21,7 @@ public class Slot : MonoBehaviour, IDropHandler{
 	/// Raises the drop event.
 	/// </summary>
 	/// <param name="eventData">Event data.</param>
-	public void OnDrop (PointerEventData eventData)
-	{
+	public void OnDrop (PointerEventData eventData){
 		if (DragHandler.itemBeingDragged == null)
 			return;
 		if (!item) {

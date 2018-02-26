@@ -82,7 +82,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		ItemGrid.gameObject.GetComponent<GridLayoutGroup> ().spacing = new Vector2 (CellWidth, 10f);
 
 		//Generating itemslots (in the bottom of screen)
-		for (int i = 0; i < 3; i++) {
+		for (var i = 0; i < 3; i++) {
 			GameObject go = new GameObject();
 			go.name = "itemslot"+(i+1).ToString();
 			go.transform.SetParent (ItemGrid);
@@ -96,8 +96,8 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 
 		// Generating slots (main grid)
 		MainGrid.gameObject.GetComponent<GridLayoutGroup> ().cellSize = new Vector2 (CellWidth, CellHeight);
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 6; j++) {
+		for (var i = 0; i < 8; i++) {
+			for (var j = 0; j < 6; j++) {
 				GameObject slot = new GameObject();
 				slot.name = "b" + ((i * 6) + j).ToString ();
 				Button button = slot.AddComponent<Button> ();
@@ -128,14 +128,14 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	{
 		List<int> elements = new List<int>();
 		//"smart" counting of colors
-		for(int j = 1; j<=7; j++)
+		for(var j = 1; j<=7; j++)
 		{
 			if (CurrentColors [j] > 0)
 				elements.Add (j);
 		}
 		int r = Random.Range (1, 4);
 		//generating blocks
-		for (int i = 0; i < 3; i++) {
+		for (var i = 0; i < 3; i++) {
 			BrickColor bc = BrickColor.Random;
 
 			if (elements.Count > 0) {
@@ -165,7 +165,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	public void ContinueGame()
 	{
 		ClearField ();
-		for (int i = 1; i <= 7; i++)
+		for (var i = 1; i <= 7; i++)
 			CurrentColors [i] = 0;
 		FillItemGrid ();
 
@@ -188,7 +188,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		GameController.IsSecondChanceUsed = 0;
 		currentMult = 1f;
 		ClearField ();
-		for (int i = 1; i <= 7; i++)
+		for (var i = 1; i <= 7; i++)
 			CurrentColors [i] = 0;
 		if (GameController.IsGameStarted == 1) {
 			LoadGame ();	
@@ -233,10 +233,9 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// </summary>
 	/// <returns><c>true</c> if this instance has turn ended the specified currentItem; otherwise, <c>false</c>.</returns>
 	/// <param name="currentItem">Current item.</param>
-	public void HasTurnEnded (GameObject currentItem)
-	{
+	public void HasTurnEnded (GameObject currentItem) {
 		//Destroying unused elements of item grid
-		for (int i = 0; i < ItemGrid.childCount; i++) {
+		for (var i = 0; i < ItemGrid.childCount; i++) {
 			if (ItemGrid.GetChild (i).childCount > 0) {
 				if (ItemGrid.GetChild (i).GetChild (0).childCount > 0) {
 					Transform bonus = ItemGrid.GetChild (i).GetChild (0).GetChild(0);
@@ -248,7 +247,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		}
 
 		//Clears the trashcan (massive of objects, which has worked off)
-		for (int i = 0; i < TrashCan.Count; i++) {
+		for (var i = 0; i < TrashCan.Count; i++) {
 			Destroy (TrashCan[i]);
 		}
 		TrashCan.Clear ();
@@ -258,7 +257,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		GameObject currentSlot = currentItem.transform.parent.gameObject;
 		currentTurnStreak = 0;
 		currentColor = currentItem.GetComponent<Image> ().color;
-		for (int i = 0; i < slots.Count; i++) {
+		for (var i = 0; i < slots.Count; i++) {
 			if ((slots [i].GetComponent<RectTransform>().anchoredPosition - currentSlot.GetComponent<RectTransform>().anchoredPosition).magnitude <= CellWidth * 1.3f && slots[i].transform.childCount>0 && slots[i].transform.GetChild(0).gameObject.GetComponent<Image>().color == currentColor) {
 				targets.Add (slots [i]);
 			}
@@ -266,7 +265,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		if (targets.Count > 1) {
 			//Destroying target elements
 			GameController.TryPlaySound (SoundPool.Destroy);
-			for (int i = 0; i < targets.Count; i++) {
+			for (var i = 0; i < targets.Count; i++) {
 				if (targets [i].transform.childCount > 0) {
 					DestroyWithAnimation (targets [i].transform.GetChild (0).transform.gameObject, DestroyingAnimation.Grinding, true, true);
 				}
@@ -360,7 +359,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// </summary>
 	void RecountCurrentMult()
 	{
-		float doublemult = (multTurns > 0) ? 2.0f : 1.0f;
+		var doublemult = (multTurns > 0) ? 2.0f : 1.0f;
 		currentMult = ((float)(GameController.Turn / 100) * 0.2f + 1.0f)*doublemult;
 		Text t = MultBoard.GetComponent<Text> ();
 		t.text = "(" + currentMult.ToString("F1") + "x)";
@@ -377,8 +376,8 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// <param name="dat">Destroying animation type (see enum).</param>
 	/// <param name="isRewarded">If set to <c>true</c> is rewarded.</param>
 	/// <param name="isInfluenceOnBonus">If set to <c>true</c> is influence on bonus.</param>
-	void DestroyWithAnimation(GameObject obj, DestroyingAnimation dat, bool isRewarded, bool isInfluenceOnBonus)
-	{
+	void DestroyWithAnimation(GameObject obj, DestroyingAnimation dat, bool isRewarded, bool isInfluenceOnBonus) {
+		
 		if (obj == null)
 			return;
 
@@ -391,7 +390,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 
 		if (isInfluenceOnBonus) {
 			currentTurnStreak++;
-			for (int i = 0; i < slots.Count; i++) {
+			for (var i = 0; i < slots.Count; i++) {
 				if ((slots [i].GetComponent<RectTransform> ().anchoredPosition - obj.transform.parent.gameObject.GetComponent<RectTransform> ().anchoredPosition).magnitude <= CellWidth * 1.3f && slots [i].transform.childCount > 0 && slots [i].transform.GetChild (0).gameObject.GetComponent<Image> ().color == currentColor && slots[i].transform.GetChild(0).name != "del") {
 					
 					//Debug.Log ("Slot: " + slots[i].name + "Colors: " + currentTurnStreak.ToString() + " Bonus: " + currentBonus.ToString());
@@ -406,7 +405,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 			if (name.Contains ("bomb")) {
 				int bomblevel = 0;
 				if (name == "bomb1") {
-					for (int i = 0; i < slots.Count; i++) {
+					for (var i = 0; i < slots.Count; i++) {
 						if ((slots [i].GetComponent<RectTransform> ().anchoredPosition - obj.transform.parent.gameObject.GetComponent<RectTransform> ().anchoredPosition).magnitude <= CellWidth * 1.7f
 						    && slots [i].transform.childCount > 0 && slots [i] != obj.transform.parent) {
 							targets.Add (slots [i]);
@@ -414,7 +413,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 					}
 					bomblevel = 1;
 				} else {
-					for (int i = 0; i < slots.Count; i++) {
+					for (var i = 0; i < slots.Count; i++) {
 						if ((slots [i].GetComponent<RectTransform> ().anchoredPosition - obj.transform.parent.gameObject.GetComponent<RectTransform> ().anchoredPosition).magnitude <= CellWidth * 2.8f
 						    && slots [i].transform.childCount > 0 && slots [i] != obj.transform.parent) {
 							targets.Add (slots [i]);
@@ -438,7 +437,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 			} else if (name.Contains ("electric")) {
 				int electriclevel = 0;
 				if (name == "electric1") {
-					for (int i = 0; i < slots.Count; i++) {
+					for (var i = 0; i < slots.Count; i++) {
 						if (Mathf.Abs (slots [i].GetComponent<RectTransform> ().anchoredPosition.y - obj.transform.parent.gameObject.GetComponent<RectTransform> ().anchoredPosition.y) <= CellWidth * 0.3f
 						    && slots [i].transform.childCount > 0 && slots [i] != obj.transform.parent && (slots [i].GetComponent<RectTransform> ().anchoredPosition - obj.transform.parent.gameObject.GetComponent<RectTransform> ().anchoredPosition).magnitude <= CellWidth * 3.1f) {
 							targets.Add (slots [i]);
@@ -450,7 +449,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 					}
 					electriclevel = 1;
 				} else {
-					for (int i = 0; i < slots.Count; i++) {
+					for (var i = 0; i < slots.Count; i++) {
 						if (Mathf.Abs (slots [i].GetComponent<RectTransform> ().anchoredPosition.y - obj.transform.parent.gameObject.GetComponent<RectTransform> ().anchoredPosition.y) <= CellWidth * 0.3f
 						    && slots [i].transform.childCount > 0 && slots [i] != obj.transform.parent) {
 							targets.Add (slots [i]);
@@ -513,7 +512,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		}
 		if (dat == DestroyingAnimation.None) {
 			Destroy (obj);
-			for (int i = 0; i < targets.Count; i++) {
+			for (var i = 0; i < targets.Count; i++) {
 				if(isInferno)
 					DestroyWithAnimation (targets [i].transform.GetChild (0).gameObject, DestroyingAnimation.Inferno, true, false);
 				else
@@ -542,7 +541,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		else
 			obj.GetComponent<Animator> ().Play("Decreasing");
 
-		for (int i = 0; i < targets.Count; i++) {
+		for (var i = 0; i < targets.Count; i++) {
 			if(targets[i].transform.childCount>0)
 			{
 				if (isInferno)
@@ -580,8 +579,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// </summary>
 	/// <returns>The destroyer.</returns>
 	/// <param name="obj">Object.</param>
-	IEnumerator TimerDestroyer(GameObject obj)
-	{
+	IEnumerator TimerDestroyer(GameObject obj) {
 		yield return new WaitForSeconds (0.2f);
 		Destroy (obj);
 	}
@@ -594,8 +592,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// <param name="da">Destroying animation (see enum).</param>
 	/// <param name="isRewarded">If set to <c>true</c> is rewarded.</param>
 	/// <param name="isInfluenceOnBonus">If set to <c>true</c> is influence on bonus.</param>
-	IEnumerator ElectricDesroyingDelay(GameObject obj, DestroyingAnimation da, bool isRewarded, bool isInfluenceOnBonus)
-	{
+	IEnumerator ElectricDesroyingDelay(GameObject obj, DestroyingAnimation da, bool isRewarded, bool isInfluenceOnBonus){
 		yield return new WaitForSeconds (0.25f);
 		DestroyWithAnimation (obj, da, isRewarded, isInfluenceOnBonus);
 	}
@@ -605,8 +602,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// </summary>
 	/// <returns>The points by color.</returns>
 	/// <param name="color">Color.</param>
-	int GetPointsByColor(Color color)
-	{
+	int GetPointsByColor(Color color){
 		if (color == Dump.RedColor)
 			return (int)ColorReward.Red;
 		if (color == Dump.OrangeColor)
@@ -657,11 +653,11 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		}
 
 		int sum = 0;
-		for (int i = 0; i < MAXNUM; i++)
+		for (var i = 0; i < MAXNUM; i++)
 			sum += range [i];
 		int rand = Random.Range (1, sum + 1);
 		sum = 0;
-		for (int i = 0; i < MAXNUM; i++) {
+		for (var i = 0; i < MAXNUM; i++) {
 			if (rand > sum && rand <= sum + range [i])
 				return i + 1;
 			sum += range [i];
@@ -673,8 +669,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// Counts the bonus.
 	/// </summary>
 	/// <returns>The bonus.</returns>
-	BrickType CountBonus()
-	{
+	BrickType CountBonus(){
 		if (currentTurnStreak >= 7) {
 			if (GameController.GetSkillLevel (Skills.Skull) == 4) {
 				if(Random.Range(0,2)%2 == 0)
@@ -717,7 +712,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 		if (results [3] != null) {
 			int spawnedCount = 0;
 
-			for (int i = 0; i < slots.Count*2; i+=2) {
+			for (var i = 0; i < slots.Count*2; i+=2) {
 				
 				if (int.Parse (results [3] [i].ToString()) > 0) {
 					Brick b = new Brick ((BrickType)int.Parse(results [3] [i + 1].ToString()),(BrickColor)int.Parse(results [3] [i].ToString()));
@@ -727,7 +722,7 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 				}
 			}
 			int count = slots.Count * 2;
-			for (int i = 0; i < 6; i+=2) {
+			for (var i = 0; i < 6; i+=2) {
 				if (int.Parse (results [3] [count+i].ToString()) > 0) {
 					Brick b = new Brick ((BrickType)int.Parse(results [3] [count + i + 1].ToString()), (BrickColor)int.Parse(results [3] [count+i].ToString()));
 					b.brick.AddComponent<CanvasGroup> ();
@@ -749,11 +744,10 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 	/// <summary>
 	/// Saves the game.
 	/// </summary>
-	public void SaveGame()
-	{
+	public void SaveGame(){
 		StringBuilder sb = new StringBuilder();
 		sb.AppendFormat ("{0}_{1}_{2}_", GameController.IsSecondChanceUsed, GameController.Score, GameController.Turn);
-		for (int i = 0; i < slots.Count; i++) {
+		for (var i = 0; i < slots.Count; i++) {
 			if (slots [i].transform.childCount > 0) {
 				GameObject brick = slots [i].transform.GetChild(0).gameObject;
 				sb.AppendFormat ("{0}{1}", (int)Brick.GetBrickColor (brick), (int)Brick.GetBrickType (brick));
@@ -761,14 +755,14 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 				sb.Append("00");
 		}
 		int count = 0;
-		for (int i = 0; i < ItemGrid.childCount; i++) {
+		for (var i = 0; i < ItemGrid.childCount; i++) {
 			if (ItemGrid.GetChild (i).childCount > 0) {
 				GameObject brick = ItemGrid.GetChild (i).GetChild (0).gameObject;
 				sb.AppendFormat ("{0}{1}", (int)Brick.GetBrickColor (brick), (int)Brick.GetBrickType (brick));
 			} else
 				count++;
 		}
-		for (int i = 0; i < count; i++) {
+		for (var i = 0; i < count; i++) {
 			sb.Append ("00");
 		}
 		GameController.SaveGameData (sb.ToString ());
@@ -779,13 +773,11 @@ public class LevelEditor : MonoBehaviour, IHasTurnEnded{
 /// <summary>
 /// I has turn ended.
 /// </summary>
-namespace UnityEngine.EventSystems
-{
+namespace UnityEngine.EventSystems{
 	/// <summary>
 	/// I has turn ended.
 	/// </summary>
-	public interface IHasTurnEnded : IEventSystemHandler
-	{
+	public interface IHasTurnEnded : IEventSystemHandler{
 		void HasTurnEnded(GameObject go);
 	}
 

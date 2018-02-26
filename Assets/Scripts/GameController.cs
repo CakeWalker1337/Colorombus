@@ -100,8 +100,7 @@ public static class GameController {
 	/// <summary>
 	/// Inits the global settings.
 	/// </summary>
-	public static void InitGlobalSettings()
-	{		
+	public static void InitGlobalSettings(){		
 		LoadUserData ();
 		Dump.Init ();
 		InitSkillCosts ();
@@ -128,8 +127,7 @@ public static class GameController {
 	/// Sets the user interface manager.
 	/// </summary>
 	/// <param name="manager">Manager.</param>
-	public static void SetUIManager (UIManagerScript manager)
-	{
+	public static void SetUIManager (UIManagerScript manager){
 		UIManager = manager;
 	}
 
@@ -137,16 +135,14 @@ public static class GameController {
 	/// Sets the level editor.
 	/// </summary>
 	/// <param name="levelEditor">Level editor.</param>
-	public static void SetLevelEditor(LevelEditor levelEditor)
-	{
+	public static void SetLevelEditor(LevelEditor levelEditor){
 		LevelEditor = levelEditor;
 	}
 
 	/// <summary>
 	/// Ends the game.
 	/// </summary>
-	public static void EndGame()
-	{
+	public static void EndGame(){
 		if (IsSecondChanceUsed == 0) {
 			UIManager.OpenSecondChanceMenu ();
 		} 
@@ -159,8 +155,7 @@ public static class GameController {
 	/// <summary>
 	/// Starts the game.
 	/// </summary>
-	public static void StartGame()
-	{
+	public static void StartGame(){
 		IsSecondChanceUsed = 0;
 		IsGameStarted = 0;
 		LevelEditor.StartGame ();
@@ -169,16 +164,14 @@ public static class GameController {
 	/// <summary>
 	/// Continues the game.
 	/// </summary>
-	public static void ContinueGame()
-	{
+	public static void ContinueGame(){
 		LevelEditor.ContinueGame ();
 	}
 
 	/// <summary>
 	/// Switchs the sound settings.
 	/// </summary>
-	public static void SwitchSoundSettings()
-	{
+	public static void SwitchSoundSettings(){
 		Sound = (Sound == 1) ? 0 : 1;
 	}
 
@@ -186,8 +179,7 @@ public static class GameController {
 	/// Tries the play sound.
 	/// </summary>
 	/// <param name="sound">Sound.</param>
-	public static void TryPlaySound(SoundPool sound)
-	{
+	public static void TryPlaySound(SoundPool sound){
 		if (Sound == 1) {
 			
 			switch (sound) {
@@ -223,16 +215,14 @@ public static class GameController {
 	/// <summary>
 	/// Switchs the music settings.
 	/// </summary>
-	public static void SwitchMusicSettings()
-	{
+	public static void SwitchMusicSettings(){
 		Music = (Music == 1) ? 0 : 1;
 	}
 
 	/// <summary>
 	/// Corrects the music.
 	/// </summary>
-	public static void CorrectMusic()
-	{
+	public static void CorrectMusic(){
 		if (Music == 1)
 			MusicSource.Play ();
 		else 
@@ -242,8 +232,7 @@ public static class GameController {
 	/// <summary>
 	/// Switchs the design settings.
 	/// </summary>
-	public static void SwitchDesignSettings()
-	{
+	public static void SwitchDesignSettings(){
 		Design = (Design == DESIGN_NEW) ? DESIGN_OLD : DESIGN_NEW;
 		Dump.LoadColors ();
 	}
@@ -251,16 +240,14 @@ public static class GameController {
 	/// <summary>
 	/// Switchs the effects settings.
 	/// </summary>
-	public static void SwitchEffectsSettings()
-	{
+	public static void SwitchEffectsSettings(){
 		Effects = (Effects == 1) ? 0 : 1;
 	}
 
 	/// <summary>
 	/// Loads the user data.
 	/// </summary>
-	public static void LoadUserData()
-	{
+	public static void LoadUserData(){
 		Sound = (PlayerPrefs.HasKey ("sound")) ? PlayerPrefs.GetInt ("sound") : 1;
 		Music = (PlayerPrefs.HasKey ("music")) ? PlayerPrefs.GetInt ("music") : 1;
 		Effects = (PlayerPrefs.HasKey ("effects")) ? PlayerPrefs.GetInt ("effects") : 1;
@@ -276,8 +263,7 @@ public static class GameController {
 	/// <summary>
 	/// Saves the user data.
 	/// </summary>
-	public static void SaveUserData()
-	{
+	public static void SaveUserData(){
 		PlayerPrefs.SetInt ("sound", Sound);
 		PlayerPrefs.SetInt ("music", Music);
 		PlayerPrefs.SetInt ("effects", Effects);
@@ -317,7 +303,7 @@ public static class GameController {
 			return null;
 		string[] buf = str.Split('_');
 		List<int> res = new List<int> ();
-		for (int i = 0; i < buf.GetLength (0); i++)
+		for (var i = 0; i < buf.GetLength (0); i++)
 			res.Add (int.Parse (buf [i]));
 		return res;
 	}
@@ -332,7 +318,7 @@ public static class GameController {
 		if (buf.Count == 0)
 			return "";
 		sb.AppendFormat ("{0}", buf [0]);
-		for (int i = 1; i < buf.Count; i++)
+		for (var i = 1; i < buf.Count; i++)
 			sb.AppendFormat ("_{0}", buf [i]);
 		return sb.ToString ();
 	}
@@ -408,16 +394,14 @@ public static class GameController {
 	/// Ups the skill level.
 	/// </summary>
 	/// <param name="skill">Skill.</param>
-	public static void UpSkillLevel(Skills skill)
-	{
+	public static void UpSkillLevel(Skills skill){
 		skills [(int)skill]++;
 	}
 
 	/// <summary>
 	/// Inits the skill costs.
 	/// </summary>
-	public static void InitSkillCosts()
-	{
+	public static void InitSkillCosts(){
 		costs = new int[4][];
 		costs [0] = new int[4];
 		costs [1] = new int[4];
@@ -441,8 +425,7 @@ public static class GameController {
 	/// <returns>The skill price.</returns>
 	/// <param name="skill">Skill.</param>
 	/// <param name="currentLevel">Current level.</param>
-	public static int GetSkillPrice(Skills skill, int currentLevel)
-	{
+	public static int GetSkillPrice(Skills skill, int currentLevel){
 		if (currentLevel == 4)
 			return -1;
 
@@ -453,8 +436,7 @@ public static class GameController {
 	/// Determines if is initialized.
 	/// </summary>
 	/// <returns><c>true</c> if is initialized; otherwise, <c>false</c>.</returns>
-	public static bool IsInitialized()
-	{
+	public static bool IsInitialized(){
 		return isInitialized;
 	}
 
@@ -462,8 +444,7 @@ public static class GameController {
 	/// Shows the second chance video ad.
 	/// </summary>
 	/// <returns><c>true</c>, if second chance video ad was shown, <c>false</c> otherwise.</returns>
-	public static bool ShowSecondChanceVideoAd()
-	{
+	public static bool ShowSecondChanceVideoAd(){
 		if (IsAdLoaded()) {
 			return adManager.TryStartSecondChanceVideo ();
 		}
@@ -477,8 +458,7 @@ public static class GameController {
 	/// Shows the buy coins video ad.
 	/// </summary>
 	/// <returns><c>true</c>, if buy coins video ad was shown, <c>false</c> otherwise.</returns>
-	public static bool ShowBuyCoinsVideoAd()
-	{
+	public static bool ShowBuyCoinsVideoAd(){
 		if (IsAdLoaded()){
 			return adManager.TryStartShopCoinsVideo ();
 		}
@@ -488,16 +468,14 @@ public static class GameController {
 	/// <summary>
 	/// Closes the second chance menu.
 	/// </summary>
-	public static void CloseSecondChanceMenu()
-	{
+	public static void CloseSecondChanceMenu(){
 		UIManager.CloseSecondChanceMenu ();
 	}
 
 	/// <summary>
 	/// Shows the interstitial ad.
 	/// </summary>
-	public static void ShowInterstitialAd()
-	{
+	public static void ShowInterstitialAd(){
 		IntersistialCount++;
 		if (IntersistialCount == 5) {
 			IntersistialCount = 0;
@@ -508,8 +486,7 @@ public static class GameController {
 	/// <summary>
 	/// Gets the coins for ad.
 	/// </summary>
-	public static void GetCoinsForAd()
-	{
+	public static void GetCoinsForAd(){
 		Coins += COINS_FOR_AD;
 		UIManager.UpdateShopMenu ();
 	}
@@ -518,8 +495,7 @@ public static class GameController {
 	/// Determines if is ad loaded.
 	/// </summary>
 	/// <returns><c>true</c> if is ad loaded; otherwise, <c>false</c>.</returns>
-	public static bool IsAdLoaded()
-	{
+	public static bool IsAdLoaded(){
 		return adManager.IsVideoAdLoaded ();
 	}
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BrickType
-{
+public enum BrickType{
 	Error = 0,
 	Standart = 1,
 	Bomb = 2,
@@ -17,8 +16,7 @@ public enum BrickType
 	Coin = 9
 };
 
-public enum BrickColor
-{
+public enum BrickColor{
 	None = 0,
 	Red = 1,
 	Orange = 2,
@@ -34,41 +32,34 @@ public enum BrickColor
 public class Brick {
 
 	public GameObject brick{ get; set;}
-	public Color color
-	{
+	public Color color{
 		get{
 			return brick.GetComponent<Image> ().color;	
 		}
-		set
-		{
+		set{
 			brick.GetComponent<Image> ().color = value;
 		}
 	}
 
-	public Vector3 position
-	{
+	public Vector3 position{
 		get{
 			return brick.GetComponent<RectTransform> ().position;	
 		}
-		set
-		{
+		set{
 			brick.GetComponent<RectTransform> ().position = value;
 		}
 	}
 
-	public Vector3 scale
-	{
+	public Vector3 scale{
 		get{
 			return brick.GetComponent<RectTransform> ().localScale;	
 		}
-		set
-		{
+		set{
 			brick.GetComponent<RectTransform> ().localScale = value;
 		}
 	}
 
-	public Animator animator
-	{
+	public Animator animator{
 		get{
 			return brick.GetComponent<Animator> ();	
 		}
@@ -138,8 +129,7 @@ public class Brick {
 	/// </summary>
 	/// <returns>The brick color.</returns>
 	/// <param name="bc">Bc.</param>
-	private Color PickBrickColor(BrickColor bc)
-	{
+	private Color PickBrickColor(BrickColor bc){
 		int res = -1;
 		if (bc == BrickColor.Random)
 			res = Random.Range (1, 8);

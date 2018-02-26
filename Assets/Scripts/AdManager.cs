@@ -16,8 +16,7 @@ public class AdManager : IRewardedVideoAdListener {
 	/// <summary>
 	/// Inits the ads.
 	/// </summary>
-	public void InitAds()
-	{
+	public void InitAds(){
 		Appodeal.disableLocationPermissionCheck();
 		Appodeal.initialize(APP_KEY, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
 		Appodeal.setRewardedVideoCallbacks (this);
@@ -27,8 +26,7 @@ public class AdManager : IRewardedVideoAdListener {
 	/// Tries the start second chance video.
 	/// </summary>
 	/// <returns><c>true</c>, if start second chance video was tryed, <c>false</c> otherwise.</returns>
-	public bool TryStartSecondChanceVideo()
-	{
+	public bool TryStartSecondChanceVideo(){
 		return Appodeal.show (Appodeal.REWARDED_VIDEO, "default");
 	}
 
@@ -36,31 +34,30 @@ public class AdManager : IRewardedVideoAdListener {
 	/// Tries the start shop coins video.
 	/// </summary>
 	/// <returns><c>true</c>, if start shop coins video was tryed, <c>false</c> otherwise.</returns>
-	public bool TryStartShopCoinsVideo()
-	{
+	public bool TryStartShopCoinsVideo(){
 		return Appodeal.show (Appodeal.REWARDED_VIDEO, "ShopCoins");
 	}
 
 	#region Rewarded Video callback handlers
 
 	/// <summary>
-	/// Ons the rewarded video loaded.
+	/// On rewarded video loaded.
 	/// </summary>
-	public void onRewardedVideoLoaded() {
+	public void OnRewardedVideoLoaded() {
 		
 	}
 
 	/// <summary>
 	/// Ons the rewarded video failed to load.
 	/// </summary>
-	public void onRewardedVideoFailedToLoad() {
+	public void OnRewardedVideoFailedToLoad() {
 		
 	}
 
 	/// <summary>
 	/// Ons the rewarded video shown.
 	/// </summary>
-	public void onRewardedVideoShown() {
+	public void OnRewardedVideoShown() {
 		
 	}
 
@@ -88,8 +85,7 @@ public class AdManager : IRewardedVideoAdListener {
 	/// <summary>
 	/// Tries the start interstitial.
 	/// </summary>
-	public void TryStartInterstitial()
-	{
+	public void TryStartInterstitial(){
 		if (Appodeal.isLoaded (Appodeal.INTERSTITIAL))
 			Appodeal.show (Appodeal.INTERSTITIAL);
 	}
@@ -98,8 +94,7 @@ public class AdManager : IRewardedVideoAdListener {
 	/// Determines whether this instance is video ad loaded.
 	/// </summary>
 	/// <returns><c>true</c> if this instance is video ad loaded; otherwise, <c>false</c>.</returns>
-	public bool IsVideoAdLoaded()
-	{
+	public bool IsVideoAdLoaded(){
 		return Appodeal.isLoaded (Appodeal.REWARDED_VIDEO);
 	}
 }
