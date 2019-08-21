@@ -60,7 +60,7 @@ Also, you can make some bonuses on the field. Break FIVE blocks with same color 
 ![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen1_en.jpg)
 ![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen1_ru.jpg)
 ![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen2_en.jpg)
-![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen3_ru.jpg)
+![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen2_ru.jpg)
 ![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen3_en.jpg)
 ![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen3_ru.jpg)
 ![alt text](https://raw.github.com/CakeWalker1337/Colorumbus/master/github/screenshots/Screen4_en.jpg)
